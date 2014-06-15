@@ -145,6 +145,8 @@ public class BankAndSafe
 	/**
 	 *PostInit
 	 */
+	
+	/*
 	@EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {
@@ -162,7 +164,8 @@ public class BankAndSafe
 				e1.printStackTrace(System.err);
 			}
 		}
-
+		*/
+		
 		/*
 		if(Loader.isModLoaded("IC2"))
 		{
