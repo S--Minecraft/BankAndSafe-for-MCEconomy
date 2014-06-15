@@ -1,0 +1,8 @@
+#en_US byS
+tile.blockBank.name=MPBank
+tile.blockSafe.name=MPSafe
+
+item.item100MP.name=100MP Coin
+item.item1000MP.name=1000MP Bill
+
+creativetab.BankAndSafe=BankAndSafe
