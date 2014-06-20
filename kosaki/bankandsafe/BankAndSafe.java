@@ -4,6 +4,7 @@ import java.util.logging.Level;
 
 import kosaki.bankandsafe.blocks.BlockBank;
 import kosaki.bankandsafe.blocks.BlockSafe;
+import kosaki.bankandsafe.creativetabs.CreativeTabBankAndSafe;
 import kosaki.bankandsafe.items.Item1000MP;
 import kosaki.bankandsafe.items.Item100MP;
 import kosaki.bankandsafe.items.ItemMPWand;
@@ -19,18 +20,20 @@ import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod
 (
 	modid="BankAndSafe",
 	name="BankAndSafe for MCEconomy",
-	version="0.0.1",
+	version="0.0.1_Alpha",
 	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,);"
 	//after:IC2;after:Forestry;after:SextiarySector;required-after:MCEconomy;
 )
@@ -39,15 +42,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 	clientSideRequired = true,
 	serverSideRequired = false
 )
-
 public class BankAndSafe
 {
-	@Mod.Instance("BankAndSafe for MCEconomy")
-	public static BankAndSafe instance;
 	/**
 	 *自体のインスタンス・IDのフィールド等
 	 */
-	public static final CreativeTabs tabBankAndSafe = new CreativeTabs("BankAndSafe");
+	@Instance("BankAndSafe for MCEconomy")
+	public static BankAndSafe instance;
+	public static final CreativeTabs tabBankAndSafe = new CreativeTabBankAndSafe("BankAndSafe");
 	public static Block blockBank;
 	public static Block blockSafe;
 	public static Item item100MP;
@@ -67,6 +69,7 @@ public class BankAndSafe
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e)
 	{
+		//System.out.println("Why I can't screen the GUI!!!");
 		/**
 		 *Config作成・設定
 		 */
@@ -80,12 +83,12 @@ public class BankAndSafe
 				cfg.getBlock("blockSafeID", 2551),
 				};
 			Property itemProp[]={
-					cfg.getItem("item100MPID",2756),
-					cfg.getItem("item1000MPID",2757),
-					cfg.getItem("itemMPWandID",2758)
+					cfg.getItem("item100MPID",12756),
+					cfg.getItem("item1000MPID",12757),
+					cfg.getItem("itemMPWandID",12758)
 					};
 
-			//テクスチャ16x or 32x
+			//テクスチャx16 or x32
 			//BankAndSafe.useIC2GregMPのConfig
 			//分からん
 
@@ -109,11 +112,16 @@ public class BankAndSafe
 		/**
 		 *Block・Item追加
 		 */
-		blockBank = (new BlockBank(blockBankID, Material.rock)).setCreativeTab(tabBankAndSafe);
-		blockSafe = (new BlockSafe(blockSafeID, Material.rock)).setCreativeTab(tabBankAndSafe);
-		item100MP = (new Item100MP(item100MPID)).setCreativeTab(tabBankAndSafe);
-		item1000MP = (new Item1000MP(item1000MPID)).setCreativeTab(tabBankAndSafe);
-		itemMPWand = (new ItemMPWand(itemMPWandID)).setCreativeTab(tabBankAndSafe);
+		blockBank = new BlockBank(blockBankID, Material.iron);
+		blockSafe = new BlockSafe(blockSafeID, Material.iron);
+		item100MP = new Item100MP(item100MPID-256);
+		item1000MP = new Item1000MP(item1000MPID-256);
+		itemMPWand = new ItemMPWand(itemMPWandID-256);
+		LanguageRegistry.addName(blockBank, "Bank");
+		LanguageRegistry.addName(blockSafe, "Safe");
+		LanguageRegistry.addName(item100MP, "100MP");
+		LanguageRegistry.addName(item1000MP, "1000MP");
+		LanguageRegistry.addName(itemMPWand, "MPWand");
 		GameRegistry.registerBlock(blockBank, "blockBank");
 		GameRegistry.registerBlock(blockSafe, "blockSafe");
 		GameRegistry.registerItem(item100MP, "item100MP");
@@ -145,8 +153,6 @@ public class BankAndSafe
 	/**
 	 *PostInit
 	 */
-	
-	/*
 	@EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {
@@ -164,8 +170,7 @@ public class BankAndSafe
 				e1.printStackTrace(System.err);
 			}
 		}
-		*/
-		
+
 		/*
 		if(Loader.isModLoaded("IC2"))
 		{

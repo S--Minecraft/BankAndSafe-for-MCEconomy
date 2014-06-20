@@ -13,10 +13,12 @@ public class GuiHandler implements IGuiHandler
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
-		if (ID == 1)
+		if (ID == BankAndSafe.bankGUIID)
 		{
 			return new GuiBlockBank(player, world, x, y, z);
-		}else if(ID==2){
+		}
+		else if(ID == BankAndSafe.safeGUIID)
+		{
 			return new GuiBlockSafe(player, world, x, y, z);
 		}
 
@@ -26,10 +28,12 @@ public class GuiHandler implements IGuiHandler
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
-		if (ID == 1)
+		if (ID == BankAndSafe.bankGUIID)
 		{
 			return new ContainerBlockBank(player, world, x, y, z);
-		}else if(ID==2){
+		}
+		else if(ID == BankAndSafe.safeGUIID)
+		{
 			return new ContainerBlockSafe(player, world, x, y, z);
 		}
 
