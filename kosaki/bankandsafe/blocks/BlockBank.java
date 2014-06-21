@@ -8,12 +8,11 @@ import net.minecraft.world.World;
 
 public class BlockBank extends Block
 {
-
 	public BlockBank(int par1, Material par2Material)
 	{
 		super(par1, par2Material);
 		this.setCreativeTab(BankAndSafe.tabBankAndSafe);
-		this.setUnlocalizedName("blockBankAndSafe");
+		this.setUnlocalizedName("blockBank");
 		this.setTextureName("bankandsafe:Bank");
 	}
 
@@ -27,5 +26,4 @@ public class BlockBank extends Block
 		}
 		return true;
 	}
-
 }
