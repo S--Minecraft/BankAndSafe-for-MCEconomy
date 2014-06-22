@@ -166,7 +166,7 @@ public class BankAndSafe
 		 *ワールドに入ったときMPがマイナスだったときの修正
 		 *できねえ
 		 */
-		//MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
+		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 		/**
 		 *GUI追加
 		 */
