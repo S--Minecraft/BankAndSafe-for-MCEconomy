@@ -4,5 +4,6 @@ tile.blockSafe.name=MPSafe
 
 item.item100MP.name=100MP Coin
 item.item1000MP.name=1000MP Bill
+item.itemMPWand.name=MPWand
 
 creativetab.BankAndSafe=BankAndSafe
