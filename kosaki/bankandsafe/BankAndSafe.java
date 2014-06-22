@@ -55,6 +55,7 @@ public class BankAndSafe
 	public static Item item100MP;
 	public static Item item1000MP;
 	public static Item itemMPWand;
+	
 	public int blockBankID;
 	public int blockSafeID;
 	public int item100MPID;
@@ -62,6 +63,10 @@ public class BankAndSafe
 	public int itemMPWandID;
 	public static final int bankGUIID = 1;
 	public static final int safeGUIID = 2;
+	
+	public static boolean textureSize
+	public static boolean respawn0MP
+	//public static boolean useIC2GregMP
 
 	/**
 	 *PreInit
@@ -87,11 +92,22 @@ public class BankAndSafe
 					cfg.getItem("item1000MPID",12757),
 					cfg.getItem("itemMPWandID",12758)
 					};
-
+			
+			//こんなんでいいのかな？
 			//テクスチャx16 or x32
-			//BankAndSafe.useIC2GregMPのConfig
-			//分からん
-
+			textureSize = cfg.get(config.CATEGORY_GENERAL,
+									"Will you use x32 for the texture?",
+									false).getBoolean(false);
+			//リスポーン時に0MPにするかどうか
+			respawn0MP = cfg.get(config.CATEGORY_GENERAL,
+									"When you respawn, will the MP be 0?",
+									false).getBoolean(false);
+			//IC2とGreg導入時、MPで商品を買えるのを許可するか
+			useIC2GregMP = cfg.get(config.CATEGORY_GENERAL,
+									"When you are using Gregtech, can you buy the IC2 block with MP?",
+									false).getBoolean(false);
+			
+			
 			//blockProp.comment="EUTeleporter's BlockID";
 			blockBankID=blockProp[0].getInt();
 			blockSafeID=blockProp[1].getInt();
