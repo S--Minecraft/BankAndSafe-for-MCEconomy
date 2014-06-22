@@ -7,14 +7,33 @@ import net.minecraftforge.event.world.WorldEvent;
 
 public class WorldEventHandler
 {
-	private static EntityPlayer entityPlayer;
-
 	@ForgeSubscribe
+	/*
 	public void onPlayerEntertoWorld(WorldEvent event)
 	{
 		if(MCEconomyAPI.getPlayerMP(entityPlayer)<0)
 		{
 			MCEconomyAPI.setPlayerMP(entityPlayer,0);
 		}
+	}
+	*/
+	/*
+	public void onEntityJoinWorld(EntityJoinWorldEvent event)
+	{
+		if(!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer)
+		{
+			if(MCEconomyAPI.getPlayerMP(entityPlayer)<0)
+			{
+				MCEconomyAPI.setPlayerMP(entityPlayer,0);
+			}
+		}
+	}
+	*/
+	public void onPlayerLogin(EntityPlayer player)
+	{
+		if(MCEconomyAPI.getPlayerMP(entityPlayer)<0)
+			{
+				MCEconomyAPI.setPlayerMP(entityPlayer,0);
+			}
 	}
 }

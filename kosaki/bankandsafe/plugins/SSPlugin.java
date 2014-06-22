@@ -8,8 +8,6 @@ import sextiarysector.api.season.Season;
 
 public class SSPlugin
 {
-	private static Season summer;
-	private static Season winter;
 	private static World world;
 	private static EntityPlayer entityPlayer;
 

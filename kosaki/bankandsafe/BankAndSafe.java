@@ -60,8 +60,8 @@ public class BankAndSafe
 	public int item100MPID;
 	public int item1000MPID;
 	public int itemMPWandID;
-	public static final int bankGUIID=1;
-	public static final int safeGUIID=2;
+	public static final int bankGUIID = 1;
+	public static final int safeGUIID = 2;
 
 	/**
 	 *PreInit
@@ -69,7 +69,7 @@ public class BankAndSafe
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e)
 	{
-		//System.out.println("Why I can't screen the GUI!!!");
+		//System.out.println("Why can't I screen the GUI!!!");
 		/**
 		 *Config作成・設定
 		 */
@@ -117,10 +117,10 @@ public class BankAndSafe
 		item100MP = new Item100MP(item100MPID-256);
 		item1000MP = new Item1000MP(item1000MPID-256);
 		itemMPWand = new ItemMPWand(itemMPWandID-256);
-		LanguageRegistry.addName(blockBank, "Bank");
-		LanguageRegistry.addName(blockSafe, "Safe");
-		LanguageRegistry.addName(item100MP, "100MP");
-		LanguageRegistry.addName(item1000MP, "1000MP");
+		LanguageRegistry.addName(blockBank, "MPBank");
+		LanguageRegistry.addName(blockSafe, "MPSafe");
+		LanguageRegistry.addName(item100MP, "100MP Coin");
+		LanguageRegistry.addName(item1000MP, "1000MP Bill");
 		LanguageRegistry.addName(itemMPWand, "MPWand");
 		GameRegistry.registerBlock(blockBank, "blockBank");
 		GameRegistry.registerBlock(blockSafe, "blockSafe");
@@ -156,6 +156,7 @@ public class BankAndSafe
 	@EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {
+		/*
 		if (Loader.isModLoaded("SextiarySector"))
 		{
 			System.out.println("[BankAndSafe]Now checking SextiarySector");
@@ -170,6 +171,7 @@ public class BankAndSafe
 				e1.printStackTrace(System.err);
 			}
 		}
+		*/
 
 		/*
 		if(Loader.isModLoaded("IC2"))
