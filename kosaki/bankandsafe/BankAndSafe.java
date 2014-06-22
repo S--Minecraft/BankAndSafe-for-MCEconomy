@@ -65,6 +65,7 @@ public class BankAndSafe
 	public static final int safeGUIID = 2;
 	
 	public static boolean textureSize
+	public static int textureSizeFile
 	public static boolean respawn0MP
 	//public static boolean useIC2GregMP
 
@@ -98,6 +99,12 @@ public class BankAndSafe
 			textureSize = cfg.get(config.CATEGORY_GENERAL,
 									"Will you use x32 for the texture?",
 									false).getBoolean(false);
+			if(textureSize)
+			{
+			textureSizeFile = 32;
+			}else{
+			textureSizeFile = 16;
+			}
 			//リスポーン時に0MPにするかどうか
 			respawn0MP = cfg.get(config.CATEGORY_GENERAL,
 									"When you respawn, will the MP be 0?",

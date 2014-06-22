@@ -15,7 +15,7 @@ public class ItemMPWand extends Item
 		super(par1);
 		this.setCreativeTab(BankAndSafe.tabBankAndSafe);
 		this.setUnlocalizedName("ItemMPWand");
-		this.setTextureName("bankandsafe:MPWand");
+		this.setTextureName("bankandsafe:MPWand - " + BankAndSafe.textureSizeFile);
 		this.setMaxStackSize(1);
 	}
 

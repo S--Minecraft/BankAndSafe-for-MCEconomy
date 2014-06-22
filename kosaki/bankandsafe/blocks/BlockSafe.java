@@ -13,7 +13,7 @@ public class BlockSafe extends Block
 		super(par1, par2Material);
 		this.setCreativeTab(BankAndSafe.tabBankAndSafe);
 		this.setUnlocalizedName("blockSafe");
-		this.setTextureName("bankandsafe:Safe");
+		this.setTextureName("bankandsafe:Safe - " + BankAndSafe.textureSizeFile);
 	}
 
 	@Override

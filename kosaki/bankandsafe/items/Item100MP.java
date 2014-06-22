@@ -15,7 +15,7 @@ public class Item100MP extends Item
 		super(par1);
 		this.setCreativeTab(BankAndSafe.tabBankAndSafe);
 		this.setUnlocalizedName("Item100MP");
-		this.setTextureName("bankandsafe:100MP");
+		this.setTextureName("bankandsafe:100MP - " + BankAndSafe.textureSizeFile);
 		this.setMaxStackSize(64);
 	}
 
