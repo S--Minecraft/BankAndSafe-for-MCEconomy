@@ -8,8 +8,8 @@ import sextiarysector.api.season.Season;
 
 public class SSPlugin
 {
-	private static World world;
-	private static EntityPlayer entityPlayer;
+	private static World world = FMLClientHandler.instance().getClient().theWorld
+	private static EntityPlayer entityPlayer = minecraft.thePlayer;
 
 	public static void load()
 	{
@@ -34,6 +34,6 @@ public class SSPlugin
 		}
 
 		//トロフィー取得時にMP取得
-
+		
 	}
 }

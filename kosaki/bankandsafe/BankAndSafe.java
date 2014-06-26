@@ -138,16 +138,13 @@ public class BankAndSafe
 		/**
 		 *Block・Item追加
 		 */
+		//別クラス化のときは「(new クラス名()).registerBlocks();」
+		System.out.println("[BankAndSafe for MCEconomy] Adding blocks and items.");
 		blockBank = new BlockBank(blockBankID, Material.iron);
 		blockSafe = new BlockSafe(blockSafeID, Material.iron);
 		item100MP = new Item100MP(item100MPID-256);
 		item1000MP = new Item1000MP(item1000MPID-256);
 		itemMPWand = new ItemMPWand(itemMPWandID-256);
-		LanguageRegistry.addName(blockBank, "MPBank");
-		LanguageRegistry.addName(blockSafe, "MPSafe");
-		LanguageRegistry.addName(item100MP, "100MP Coin");
-		LanguageRegistry.addName(item1000MP, "1000MP Bill");
-		LanguageRegistry.addName(itemMPWand, "MPWand");
 		GameRegistry.registerBlock(blockBank, "blockBank");
 		GameRegistry.registerBlock(blockSafe, "blockSafe");
 		GameRegistry.registerItem(item100MP, "item100MP");
@@ -161,6 +158,7 @@ public class BankAndSafe
 	@EventHandler
 	public void eventInit(FMLInitializationEvent e)
 	{
+		System.out.println("[BankAndSafe for MCEconomy] Setting up contents.");
 		/**
 		 *敵を倒したときのドロップMP
 		 */
@@ -173,6 +171,17 @@ public class BankAndSafe
 		 *GUI追加
 		 */
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+		/**
+		 *言語登録
+		 */
+		//別クラス化のときは「(new LangRegister()).lang();」
+		System.out.println("[BankAndSafe for MCEconomy] Registering languages.");
+		LanguageRegistry.addName(blockBank, "MPBank");
+		LanguageRegistry.addName(blockSafe, "MPSafe");
+		LanguageRegistry.addName(item100MP, "100MP Coin");
+		LanguageRegistry.addName(item1000MP, "1000MP Bill");
+		LanguageRegistry.addName(itemMPWand, "MPWand");
+
 	}
 
 	/**
@@ -181,6 +190,7 @@ public class BankAndSafe
 	@EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {
+		System.out.println("[BankAndSafe for MCEconomy] Setting up plugins.");
 		/*
 		if (Loader.isModLoaded("SextiarySector"))
 		{
