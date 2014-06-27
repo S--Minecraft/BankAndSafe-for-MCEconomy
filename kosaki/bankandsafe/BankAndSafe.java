@@ -61,6 +61,7 @@ public class BankAndSafe
 	public int item100MPID;
 	public int item1000MPID;
 	public int itemMPWandID;
+	
 	public static final int bankGUIID = 1;
 	public static final int safeGUIID = 2;
 	
