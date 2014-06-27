@@ -34,8 +34,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 	modid="BankAndSafe",
 	name="BankAndSafe for MCEconomy",
 	version="0.0.1_Alpha",
-	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,);"
-	//after:IC2;after:Forestry;after:SextiarySector;required-after:MCEconomy;
+	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,;required-after:MCEconomy;);"
+	//after:IC2;after:Forestry;after:SextiarySector;
 )
 @NetworkMod
 (
@@ -61,6 +61,7 @@ public class BankAndSafe
 	public int item100MPID;
 	public int item1000MPID;
 	public int itemMPWandID;
+	
 	public static final int bankGUIID = 1;
 	public static final int safeGUIID = 2;
 	
@@ -89,33 +90,36 @@ public class BankAndSafe
 				cfg.getBlock("blockSafeID", 2551),
 				};
 			Property itemProp[]={
-					cfg.getItem("item100MPID",12756),
-					cfg.getItem("item1000MPID",12757),
-					cfg.getItem("itemMPWandID",12758)
-					};
+				cfg.getItem("item100MPID",12756),
+				cfg.getItem("item1000MPID",12757),
+				cfg.getItem("itemMPWandID",12758)
+				};
 			
-			//こんなんでいいのかな？
 			//テクスチャx16 or x32
 			textureSize = cfg.get(config.CATEGORY_GENERAL,
-									"Will you use x32 for the texture?",
-									false).getBoolean(false);
+						"Will you use x32 for the texture?",
+						false).getBoolean(false);
 			if(textureSize)
 			{
 			textureSizeFile = 32;
 			}else{
 			textureSizeFile = 16;
 			}
+			
 			//リスポーン時に0MPにするかどうか
 			respawn0MP = cfg.get(config.CATEGORY_GENERAL,
-									"When you respawn, will the MP be 0?",
-									false).getBoolean(false);
+						"When you respawn, will the MP be 0?",
+						false).getBoolean(false);
 			//IC2とGreg導入時、MPで商品を買えるのを許可するか
+			/*
 			useIC2GregMP = cfg.get(config.CATEGORY_GENERAL,
-									"When you are using Gregtech, can you buy the IC2 block with MP?",
-									false).getBoolean(false);
-			
+						"When you are using Gregtech, can you buy the IC2 block with MP?",
+						false).getBoolean(false);
+			*/
 			
 			//blockProp.comment="EUTeleporter's BlockID";
+			itemProp.comment="These are minused 256.So it's the real id.";
+			
 			blockBankID=blockProp[0].getInt();
 			blockSafeID=blockProp[1].getInt();
 			item100MPID=itemProp[0].getInt();
@@ -135,16 +139,13 @@ public class BankAndSafe
 		/**
 		 *Block・Item追加
 		 */
+		//別クラス化のときは「(new クラス名()).registerBlocks();」
+		System.out.println("[BankAndSafe for MCEconomy] Adding blocks and items.");
 		blockBank = new BlockBank(blockBankID, Material.iron);
 		blockSafe = new BlockSafe(blockSafeID, Material.iron);
 		item100MP = new Item100MP(item100MPID-256);
 		item1000MP = new Item1000MP(item1000MPID-256);
 		itemMPWand = new ItemMPWand(itemMPWandID-256);
-		LanguageRegistry.addName(blockBank, "MPBank");
-		LanguageRegistry.addName(blockSafe, "MPSafe");
-		LanguageRegistry.addName(item100MP, "100MP Coin");
-		LanguageRegistry.addName(item1000MP, "1000MP Bill");
-		LanguageRegistry.addName(itemMPWand, "MPWand");
 		GameRegistry.registerBlock(blockBank, "blockBank");
 		GameRegistry.registerBlock(blockSafe, "blockSafe");
 		GameRegistry.registerItem(item100MP, "item100MP");
@@ -158,19 +159,30 @@ public class BankAndSafe
 	@EventHandler
 	public void eventInit(FMLInitializationEvent e)
 	{
+		System.out.println("[BankAndSafe for MCEconomy] Setting up contents.");
 		/**
 		 *敵を倒したときのドロップMP
 		 */
 		MinecraftForge.EVENT_BUS.register(new LivingDeathEventHandler());
 		/**
-		 *ワールドに入ったときMPがマイナスだったときの修正
-		 *できねえ
+		 *リスポーン時にMPを0にする/(ワールドに入ったときにMPが0未満だったときに0にする)
 		 */
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 		/**
 		 *GUI追加
 		 */
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+		/**
+		 *言語登録
+		 */
+		//別クラス化のときは「(new LangRegister()).lang();」
+		System.out.println("[BankAndSafe for MCEconomy] Registering languages.");
+		LanguageRegistry.addName(blockBank, "MPBank");
+		LanguageRegistry.addName(blockSafe, "MPSafe");
+		LanguageRegistry.addName(item100MP, "100MP Coin");
+		LanguageRegistry.addName(item1000MP, "1000MP Bill");
+		LanguageRegistry.addName(itemMPWand, "MPWand");
+
 	}
 
 	/**
@@ -179,6 +191,7 @@ public class BankAndSafe
 	@EventHandler
     public void postInit(FMLPostInitializationEvent e)
     {
+		System.out.println("[BankAndSafe for MCEconomy] Setting up plugins.");
 		/*
 		if (Loader.isModLoaded("SextiarySector"))
 		{

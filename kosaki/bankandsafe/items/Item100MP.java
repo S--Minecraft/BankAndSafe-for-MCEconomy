@@ -22,7 +22,7 @@ public class Item100MP extends Item
 	@Override
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player)
 	{
-		//右クリックでアイテムから内部に（未実装）
+		//右クリックでアイテムから内部に（実装中）
 		//アイテム削除
 		if (!player.capabilities.isCreativeMode)
         {
@@ -30,6 +30,12 @@ public class Item100MP extends Item
         }
 		//内部に100MP追加
 		MCEconomyAPI.addPlayerMP(player, 100);
+		//チャットで追加されたと表示
+		if (!world.isRemote)
+		{
+			if (player != null)
+			player.addChatMessage(BankAndSafe.100ITEM_TO_MP_MESSAGE);
+		}
 		return item;
 	}
 }
