@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSafe extends Block
+public class BlockSafe extends BlockContainer
 {
 	@SideOnly(Side.CLIENT)
 	private Icon frontIcon;
@@ -39,7 +39,59 @@ public class BlockSafe extends Block
 		}
 		return true;
 	}
-
+	
+	/**
+	 *コンテナ関連
+	 */
+	//TileEntity生成
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new TileEntitySafe();
+	}
+	
+	//ブロックが壊れたら、中のアイテムをまき散らす
+	@Override
+	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
+	{
+		TileEntitySafe tileentity = (TileEntitySafe) par1World.getBlockTileEntity(par2, par3, par4);
+ 		
+		if (tileentity != null)
+		{
+			for (int j1 = 0; j1 < tileentity.getSizeInventory(); ++j1)
+			{
+				ItemStack itemstack = tileentity.getStackInSlot(j1);
+				if (itemstack != null)
+				{
+					float f = par1World.rand.nextFloat() * 0.8F + 0.1F;
+					float f1 = par1World.rand.nextFloat() * 0.8F + 0.1F;
+					float f2 = par1World.rand.nextFloat() * 0.8F + 0.1F;
+					
+					while (itemstack.stackSize > 0)
+					{
+						int k1 = par1World.rand.nextInt(21) + 10;
+						if (k1 > itemstack.stackSize)
+						{
+							k1 = itemstack.stackSize;
+						}
+						itemstack.stackSize -= k1;
+						EntityItem entityitem = new EntityItem(par1World, (double)((float)par2 + f), (double)((float)par3 + f1), (double)((float)par4 + f2), new ItemStack(itemstack.itemID, k1, itemstack.getItemDamage()));
+						if (itemstack.hasTagCompound())
+						{
+							entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+						}
+						float f3 = 0.05F;
+						entityitem.motionX = (double)((float)par1World.rand.nextGaussian() * f3);
+						entityitem.motionY = (double)((float)par1World.rand.nextGaussian() * f3 + 0.2F);
+						entityitem.motionZ = (double)((float)par1World.rand.nextGaussian() * f3);
+						par1World.spawnEntityInWorld(entityitem);
+					}
+				}
+			}
+			par1World.func_96440_m(par2, par3, par4, par5);
+		}
+		super.breakBlock(par1World, par2, par3, par4, par5, par6);
+	}
+	
 	/**
 	 *テクスチャ
 	 */

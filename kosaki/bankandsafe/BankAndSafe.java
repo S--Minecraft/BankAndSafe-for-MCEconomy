@@ -152,6 +152,7 @@ public class BankAndSafe
 		item100MP = new Item100MP(item100MPID-256);
 		item1000MP = new Item1000MP(item1000MPID-256);
 		itemMPWand = new ItemMPWand(itemMPWandID-256);
+		
 		GameRegistry.registerBlock(blockBank, "blockBank");
 		GameRegistry.registerBlock(blockSafe, "blockSafe");
 		GameRegistry.registerItem(item100MP, "item100MP");
@@ -184,6 +185,11 @@ public class BankAndSafe
 		LanguageRegistry.addName(item100MP, "100MP Coin");
 		LanguageRegistry.addName(item1000MP, "1000MP Bill");
 		LanguageRegistry.addName(itemMPWand, "MPWand");
+		/**
+		 *TileEntity登録
+		 */
+		GameRegistry.registerTileEntity(BlockBank.class, "blockBank");
+		GameRegistry.registerTileEntity(BlockSafe.class, "blockSafe");
 		/**
 		 *GUI追加
 		 */
