@@ -8,7 +8,6 @@ import kosaki.bankandsafe.creativetabs.CreativeTabBankAndSafe;
 import kosaki.bankandsafe.items.Item1000MP;
 import kosaki.bankandsafe.items.Item100MP;
 import kosaki.bankandsafe.items.ItemMPWand;
-import kosaki.bankandsafe.plugins.SSPlugin;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -17,7 +16,6 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Property;
 import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -34,7 +32,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 	modid="BankAndSafe",
 	name="BankAndSafe for MCEconomy",
 	version="0.0.1_Alpha",
-	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,;required-after:MCEconomy;);"
+	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,);"/*required-after:MCEconomy;);"*/
 	//after:IC2;after:Forestry;after:SextiarySector;
 )
 @NetworkMod
@@ -55,19 +53,26 @@ public class BankAndSafe
 	public static Item item100MP;
 	public static Item item1000MP;
 	public static Item itemMPWand;
-	
+
 	public int blockBankID;
 	public int blockSafeID;
 	public int item100MPID;
 	public int item1000MPID;
 	public int itemMPWandID;
-	
+
 	public static final int bankGUIID = 1;
 	public static final int safeGUIID = 2;
-	
-	public static boolean textureSize
-	public static int textureSizeFile
-	public static boolean respawn0MP
+
+	public static final String ITEM1000MP_TO_MP_MESSAGE = "Change to 1000MP is succeeded!";
+	public static final String ITEM100MP_TO_MP_MESSAGE = "Change to 100MP is succeeded!";
+	public static final String MP_TO_ITEM1000MP_MESSAGE = "Change to 1000MPItem is succeeded!";
+	public static final String MP_TO_ITEM1000MP_CANCEL_MESSAGE = "Change to 1000MPItem is failed.";
+	public static final String MP_TO_ITEM100MP_MESSAGE = "Change to 100MPItem is succeeded!";
+	public static final String MP_TO_ITEM100MP_CANCEL_MESSAGE = "Change to 100MPItem is failed.";
+
+	public static boolean textureSize;
+	public static int textureSizeFile;
+	public static boolean respawn0MP;
 	//public static boolean useIC2GregMP
 
 	/**
@@ -85,29 +90,34 @@ public class BankAndSafe
 		{
 			cfg.load();
 			//ブロックID・アイテムID
-			Property blockProp[]={
+			Property blockProp[]=
+			{
 				cfg.getBlock("blockBankID", 2550),
 				cfg.getBlock("blockSafeID", 2551),
-				};
-			Property itemProp[]={
+			};
+			Property itemProp[]=
+			{
 				cfg.getItem("item100MPID",12756),
 				cfg.getItem("item1000MPID",12757),
 				cfg.getItem("itemMPWandID",12758)
-				};
-			
+			};
+			itemProp[1].comment="These are same as game ID because it is subtracting 256 internally.";
+
 			//テクスチャx16 or x32
-			textureSize = cfg.get(config.CATEGORY_GENERAL,
-						"Will you use x32 for the texture?",
-						false).getBoolean(false);
+			textureSize = cfg.get(cfg.CATEGORY_GENERAL,
+									"Will you use x32 for the texture?",
+									false).getBoolean(false);
 			if(textureSize)
 			{
-			textureSizeFile = 32;
-			}else{
-			textureSizeFile = 16;
+				textureSizeFile = 32;
 			}
-			
+			else
+			{
+				textureSizeFile = 16;
+			}
+
 			//リスポーン時に0MPにするかどうか
-			respawn0MP = cfg.get(config.CATEGORY_GENERAL,
+			respawn0MP = cfg.get(cfg.CATEGORY_GENERAL,
 						"When you respawn, will the MP be 0?",
 						false).getBoolean(false);
 			//IC2とGreg導入時、MPで商品を買えるのを許可するか
@@ -116,16 +126,12 @@ public class BankAndSafe
 						"When you are using Gregtech, can you buy the IC2 block with MP?",
 						false).getBoolean(false);
 			*/
-			
-			//blockProp.comment="EUTeleporter's BlockID";
-			itemProp.comment="These are minused 256.So it's the real id.";
-			
+
 			blockBankID=blockProp[0].getInt();
 			blockSafeID=blockProp[1].getInt();
 			item100MPID=itemProp[0].getInt();
 			item1000MPID=itemProp[1].getInt();
 			itemMPWandID=itemProp[2].getInt();
-
 		}
 		catch(Exception ex)
 		{
@@ -168,10 +174,7 @@ public class BankAndSafe
 		 *リスポーン時にMPを0にする/(ワールドに入ったときにMPが0未満だったときに0にする)
 		 */
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
-		/**
-		 *GUI追加
-		 */
-		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+		
 		/**
 		 *言語登録
 		 */
@@ -182,15 +185,19 @@ public class BankAndSafe
 		LanguageRegistry.addName(item100MP, "100MP Coin");
 		LanguageRegistry.addName(item1000MP, "1000MP Bill");
 		LanguageRegistry.addName(itemMPWand, "MPWand");
-
+		
+		/**
+		 *GUI追加
+		 */
+		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 	}
 
 	/**
 	 *PostInit
 	 */
 	@EventHandler
-    public void postInit(FMLPostInitializationEvent e)
-    {
+	public void postInit(FMLPostInitializationEvent e)
+	{
 		System.out.println("[BankAndSafe for MCEconomy] Setting up plugins.");
 		/*
 		if (Loader.isModLoaded("SextiarySector"))
@@ -202,7 +209,8 @@ public class BankAndSafe
 				System.out.println("[BankAndSafe]Successfully Loaded SextiarySector Plugin");
 				SSPlugin.load();
 			}
-			catch (Exception e1) {
+			catch (Exception e1)
+			{
 				System.out.println("[BankAndSafe]Failed to check SextiarySector");
 				e1.printStackTrace(System.err);
 			}
@@ -221,27 +229,34 @@ public class BankAndSafe
 					System.out.println("[BankAndSafe]Successfully Loaded IndustrialCraft2 Plugin");
 					IC2Plugin.load();
 				}
-				catch (Exception e2) {
+				catch (Exception e2)
+				{
 					System.out.println("[BankAndSafe]Failed to check for IndustrialCraft2");
 					e.printStackTrace(System.err);
 				}
-			}else if(Load.isModLoaded("gregtech_addon") && !BankAndSafe.useIC2GregMP)
+			}
+			else if(Load.isModLoaded("gregtech_addon") && !BankAndSafe.useIC2GregMP)
 			{
 				//Configオフ+IC2+Greg、読み込みなし
 				System.out.println("[BankAndSafe]Won't check for IndustrialCraft2");
 				System.out.println("[BankAndSafe]If you wanna buy the IndustrialCraft2's Items, change the config useIC2GregMP to true.");
-			}else{
+			}
+			else
+			{
 				try
 				{
 					//IC2連携読み込み
 					System.out.println("[BankAndSafe]Successfully Loaded IndustrialCraft2 Plugin");
 					IC2Plugin.load();
 				}
-				catch (Exception e3) {
+				catch (Exception e3)
+				{
 					System.out.println("[BankAndSafe]Failed to check for IndustrialCraft2");
 					e.printStackTrace(System.err);
 				}
 			}
+		}
+
 		if(Loader.isModLoaded("BuildCraft|Core"))
 		{
 			System.out.println("[BankAndSafe]Now checking for BuildCraft");
@@ -251,11 +266,13 @@ public class BankAndSafe
 				System.out.println("[BankAndSafe]Successfully Loaded BuildCraft Plugin");
 				BCPlugin.load();
 			}
-			catch (Exception e4) {
+			catch (Exception e4)
+			{
 				System.out.println("[BankAndSafe]Failed to check for BuildCraft");
 				e.printStackTrace(System.err);
 			}
 		}
+
 		if(Loader.isModLoaded("EnderIO"))
 		{
 			System.out.println("[BankAndSafe]Now checking for EnderIO");
@@ -265,12 +282,11 @@ public class BankAndSafe
 				System.out.println("[BankAndSafe]Successfully Loaded EndeIO Plugin");
 				EIOPlugin.load();
 			}
-			catch (Exception e5) {
+			catch (Exception e5)
+			{
 				System.out.println("[BankAndSafe]Failed to check for EnderIO");
 				e.printStackTrace(System.err);
 			}
-		}
-
-		*/
+		}*/
 	}
 }
