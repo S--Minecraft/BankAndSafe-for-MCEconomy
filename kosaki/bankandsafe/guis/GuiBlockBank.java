@@ -18,7 +18,8 @@ public class GuiBlockBank extends GuiContainer
 		super(new ContainerBlockBank(player, world, x, y, z));
 	}
 
-	protected void drawGuiContainerForegroundLayer()
+	@Override
+	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		fontRenderer.drawString("Bank", 58, 6, 0x404040);
 	}
