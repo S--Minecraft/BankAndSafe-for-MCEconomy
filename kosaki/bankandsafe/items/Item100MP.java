@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 
 public class Item100MP extends Item
 {
-
 	public Item100MP(int par1)
 	{
 		super(par1);
@@ -25,17 +24,20 @@ public class Item100MP extends Item
 		//右クリックでアイテムから内部に（実装中）
 		//アイテム削除
 		if (!player.capabilities.isCreativeMode)
-        {
-            --item.stackSize;
-        }
+		{
+			--item.stackSize;
+
+		}
 		//内部に100MP追加
 		MCEconomyAPI.addPlayerMP(player, 100);
+
 		//チャットで追加されたと表示
 		if (!world.isRemote)
 		{
 			if (player != null)
-			player.addChatMessage(BankAndSafe.100ITEM_TO_MP_MESSAGE);
+			player.addChatMessage(BankAndSafe.ITEM100MP_TO_MP_MESSAGE);
 		}
+
 		return item;
 	}
 }

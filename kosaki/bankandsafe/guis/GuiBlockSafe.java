@@ -18,7 +18,8 @@ public class GuiBlockSafe extends GuiContainer
 		super(new ContainerBlockSafe(player, world, x, y, z));
 	}
 
-	protected void drawGuiContainerForegroundLayer()
+	@Override
+	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		fontRenderer.drawString("Safe", 58, 6, 0x404040);
 	}
