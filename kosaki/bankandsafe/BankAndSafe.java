@@ -64,6 +64,7 @@ public class BankAndSafe
 	public static final int safeGUIID = 2;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public static final String ITEM1000MP_TO_MP_MESSAGE = "Exchange to 1000MP is succeeded!";
 	public static final String ITEM100MP_TO_MP_MESSAGE = "Exchange to 100MP is succeeded!";
 	public static final String MP_TO_ITEM1000MP_MESSAGE = "Exchange to 1000MPItem is succeeded!";
@@ -71,12 +72,17 @@ public class BankAndSafe
 	public static final String MP_TO_ITEM100MP_MESSAGE = "Exchange to 100MPItem is succeeded!";
 	public static final String MP_TO_ITEM100MP_CANCEL_MESSAGE = "Exchange to 100MPItem is failed.";
 =======
+=======
+>>>>>>> origin/master
 	public static final String ITEM1000MP_TO_MP_MESSAGE = "Change to 1000MP is succeeded!";
 	public static final String ITEM100MP_TO_MP_MESSAGE = "Change to 100MP is succeeded!";
 	public static final String MP_TO_ITEM1000MP_MESSAGE = "Change to 1000MPItem is succeeded!";
 	public static final String MP_TO_ITEM1000MP_CANCEL_MESSAGE = "Change to 1000MPItem is failed.";
 	public static final String MP_TO_ITEM100MP_MESSAGE = "Change to 100MPItem is succeeded!";
 	public static final String MP_TO_ITEM100MP_CANCEL_MESSAGE = "Change to 100MPItem is failed.";
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 
 	public static boolean textureSize;
@@ -184,7 +190,11 @@ public class BankAndSafe
 		 */
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> origin/master
 =======
 		
 >>>>>>> origin/master
@@ -199,7 +209,11 @@ public class BankAndSafe
 		LanguageRegistry.addName(item1000MP, "1000MP Bill");
 		LanguageRegistry.addName(itemMPWand, "MPWand");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> origin/master
 =======
 		
 >>>>>>> origin/master
