@@ -53,7 +53,19 @@ public class LivingDeathEventHandler
 		{
 			return;
 		}
-
+		
+		/**
+		 *MP増加エンチャントがあるとき
+		 */
+		byte moreMP;
+		switch(EnchantmentHelper.getEnchantmentLevel(BankAndSafe.moreMPdropID, equipItem)
+		{
+		case 0: moreMP = 1; break;
+		case 1: moreMP = 2; break;
+		case 2: moreMP = 3; break;
+		case 3: moreMP = 4; break;
+		}
+		
 		/**
 		 *ダメージソースがプレイヤーの場合はMP加算する
 		 */
@@ -65,91 +77,91 @@ public class LivingDeathEventHandler
 				/**
 				 *ゾンビを倒した場合は+2MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 2);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 2*moreMP);
 			}
 			else if (event.entityLiving instanceof EntityCaveSpider)
 			{
 				/**
 				 *洞窟蜘蛛を倒した場合は+3MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 3);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 3*moreMP);
 			}
 			else if (event.entityLiving instanceof EntitySpider)
 			{
 				/**
 				 *蜘蛛を倒した場合は+2MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 2);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 2*moreMP);
 			}
 			else if (event.entityLiving instanceof EntitySkeleton)
 			{
 				/**
 				 *スケルトンを倒した場合は+3MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 3);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 3*moreMP);
 			}
 			else if (event.entityLiving instanceof EntityCreeper)
 			{
 				/**
 				 *クリーパーを倒した場合は+4MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 4);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 4*moreMP);
 			}
 			else if (event.entityLiving instanceof EntityBat)
 			{
 				/**
 				 *コウモリを倒した場合は+2MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 2);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 2*moreMP);
 			}
 			else if (event.entityLiving instanceof EntityDragon)
 			{
 				/**
 				 *エンダードラゴンを倒した場合は+1000MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 1000);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 1000*moreMP);
 			}
 			else if (event.entityLiving instanceof EntityWither)
 			{
 				/**
 				 *ウィザーを倒した場合は+1500MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 1500);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 1500*moreMP);
 			}
 			else if (event.entityLiving instanceof EntityEnderman)
 			{
 				/**
 				 *エンダーマンを倒した場合は+4MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 4);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 4*moreMP);
 			}
 			else if (event.entityLiving instanceof EntityGhast)
 			{
 				/**
 				 *ガストを倒した場合は+6MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 6);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 6*moreMP);
 			}
 			else if (event.entityLiving instanceof EntitySlime)
 			{
 				/**
 				 *スライム･マグマキューブを倒した場合は+1MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 1);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 1*moreMP);
 			}
 			else if (event.entityLiving instanceof EntitySilverfish)
 			{
 				/**
 				 *シルバーフィッシュを倒した場合は+1MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 1);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 1*moreMP);
 			}
 			else if (event.entityLiving instanceof EntityWitch)
 			{
 				/**
 				 *ウィッチを倒した場合は+10MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 10);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 10*moreMP);
 			}
 			else if (event.entityLiving instanceof EntityVillager)
 			{
@@ -162,7 +174,7 @@ public class LivingDeathEventHandler
 				}
 				else
 				{
-					MCEconomyAPI.reducePlayerMP(entityPlayer, 10);
+					MCEconomyAPI.reducePlayerMP(entityPlayer, 10-(2*moreMP));
 				}
 			}
 			else if (event.entityLiving instanceof EntityMob)
@@ -170,7 +182,7 @@ public class LivingDeathEventHandler
 				/**
 				 *モンスターを倒した場合は+3MP
 				 */
-				MCEconomyAPI.addPlayerMP(entityPlayer, 3);
+				MCEconomyAPI.addPlayerMP(entityPlayer, 3*moreMP);
 			}
 			else if(event.entityLiving instanceof EntityTameable && !event.entityLiving.getDataWatcher().getWatchableObjectString(17).isEmpty())
 			{
@@ -183,7 +195,7 @@ public class LivingDeathEventHandler
 				}
 				else
 				{
-					MCEconomyAPI.reducePlayerMP(entityPlayer, 15);
+					MCEconomyAPI.reducePlayerMP(entityPlayer, 15-(2*moreMP));
 				}
 			}
 		}
