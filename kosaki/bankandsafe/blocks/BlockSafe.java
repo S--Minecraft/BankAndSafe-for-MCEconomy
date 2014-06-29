@@ -1,22 +1,26 @@
+/*
 package kosaki.bankandsafe.blocks;
 
 import kosaki.bankandsafe.BankAndSafe;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSafe extends BlockContainer
+public class BlockSafe extends TileEntity
 {
 	@SideOnly(Side.CLIENT)
 	private Icon frontIcon;
+	private Icon blockIcon;
 
 	public BlockSafe(int par1, Material par2Material)
 	{
@@ -28,8 +32,7 @@ public class BlockSafe extends BlockContainer
 
 	/**
 	 *GUI
-	 */
-	@Override
+	 *//*
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float disX, float disY, float disZ)
 	{
 		//GUIを開く
@@ -39,22 +42,22 @@ public class BlockSafe extends BlockContainer
 		}
 		return true;
 	}
-	
+
 	/**
 	 *コンテナ関連
 	 */
 	//TileEntity生成
-	@Override
+/*
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntitySafe();
+		return new TileEntity();
 	}
-	
+*/
 	//ブロックが壊れたら、中のアイテムをまき散らす
-	@Override
+/*
 	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
 	{
-		TileEntitySafe tileentity = (TileEntitySafe) par1World.getBlockTileEntity(par2, par3, par4);
- 		
+		TileEntity tileentity = (TileEntity) par1World.getBlockTileEntity(par2, par3, par4);
+
 		if (tileentity != null)
 		{
 			for (int j1 = 0; j1 < tileentity.getSizeInventory(); ++j1)
@@ -65,7 +68,7 @@ public class BlockSafe extends BlockContainer
 					float f = par1World.rand.nextFloat() * 0.8F + 0.1F;
 					float f1 = par1World.rand.nextFloat() * 0.8F + 0.1F;
 					float f2 = par1World.rand.nextFloat() * 0.8F + 0.1F;
-					
+
 					while (itemstack.stackSize > 0)
 					{
 						int k1 = par1World.rand.nextInt(21) + 10;
@@ -91,11 +94,10 @@ public class BlockSafe extends BlockContainer
 		}
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
-	
+
 	/**
 	 *テクスチャ
-	 */
-	@Override
+	 *//*
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
 	{
 		//向きがあるように設定・東西南北固定をなくす
@@ -103,7 +105,6 @@ public class BlockSafe extends BlockContainer
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, l, 2);
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int par1, int par2)
 	{
@@ -123,7 +124,6 @@ public class BlockSafe extends BlockContainer
 		}
 	}
 
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister)
 	{
@@ -133,3 +133,4 @@ public class BlockSafe extends BlockContainer
 		this.frontIcon = par1IconRegister.registerIcon("bankandsafe:Safe - " + BankAndSafe.textureSizeFile);
 	}
 }
+*/

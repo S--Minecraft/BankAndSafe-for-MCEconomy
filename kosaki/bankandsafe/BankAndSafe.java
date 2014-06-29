@@ -3,14 +3,16 @@ package kosaki.bankandsafe;
 import java.util.logging.Level;
 
 import kosaki.bankandsafe.blocks.BlockBank;
-import kosaki.bankandsafe.blocks.BlockSafe;
 import kosaki.bankandsafe.creativetabs.CreativeTabBankAndSafe;
+import kosaki.bankandsafe.enchantments.EnchantmentMoreMPdrop;
 import kosaki.bankandsafe.items.Item1000MP;
 import kosaki.bankandsafe.items.Item100MP;
 import kosaki.bankandsafe.items.ItemMPWand;
+import kosaki.bankandsafe.tileentities.TileEntitySafe;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
@@ -128,9 +130,9 @@ public class BankAndSafe
 						"Will Enchant [More MP Drop] be added?",
 						true).getBoolean(true);
 			//MP増加エンチャントのID
-			moreMPdropID = config.get(cfg.CATEGORY_GENERAL,
+			moreMPdropID = cfg.get(cfg.CATEGORY_GENERAL,
 						"moreMPdropID", 21).getInt();
-			
+
 			//リスポーン時に0MPにするかどうか
 			respawn0MP = cfg.get(cfg.CATEGORY_GENERAL,
 						"When you respawn, will the MP be 0?",
@@ -139,7 +141,7 @@ public class BankAndSafe
 			respawnUseMP = cfg.get(cfg.CATEGORY_GENERAL,
 						"When you respawn,how much MP will be needed?",
 						10).getInt();
-			
+
 			//IC2とGreg導入時、MPで商品を買えるのを許可するか
 			/*
 			useIC2GregMP = cfg.get(config.CATEGORY_GENERAL,
@@ -170,11 +172,11 @@ public class BankAndSafe
 		//別クラス化のときは「(new クラス名()).registerBlocks();」
 		System.out.println("[BankAndSafe for MCEconomy] Adding blocks and items.");
 		blockBank = new BlockBank(blockBankID, Material.iron);
-		blockSafe = new BlockSafe(blockSafeID, Material.iron);
+		//blockSafe = new BlockSafe(blockSafeID, Material.iron);
 		item100MP = new Item100MP(item100MPID-256);
 		item1000MP = new Item1000MP(item1000MPID-256);
 		itemMPWand = new ItemMPWand(itemMPWandID-256);
-		
+
 		GameRegistry.registerBlock(blockBank, "blockBank");
 		GameRegistry.registerBlock(blockSafe, "blockSafe");
 		GameRegistry.registerItem(item100MP, "item100MP");
@@ -194,7 +196,7 @@ public class BankAndSafe
 		 */
 		if (moreMPdropAdd)
 		{
-			moreMPdrop = new EnchantmentMoreMPdrop(moreMPdropID, 2).setname("moreMPdrop");
+			moreMPdrop = new EnchantmentMoreMPdrop(moreMPdropID, 2).setName("moreMPdrop");
 		}
 		/**
 		 *敵を倒したときのドロップMP
@@ -208,21 +210,20 @@ public class BankAndSafe
 		 *言語登録
 		 */
 		System.out.println("[BankAndSafe for MCEconomy] Registering languages.");
-		Localization.addLocalization("/bankandsafe/lang/", DefaultProps.DEFAULT_LANGUAGE);
+		//Localization.addLocalization("/bankandsafe/lang/", DefaultProps.DEFAULT_LANGUAGE);
 		//別クラス化のときは「(new LangRegister()).lang();」
-		/*
+
 		LanguageRegistry.addName(blockBank, "MPBank");
 		LanguageRegistry.addName(blockSafe, "MPSafe");
 		LanguageRegistry.addName(item100MP, "100MP Coin");
 		LanguageRegistry.addName(item1000MP, "1000MP Bill");
 		LanguageRegistry.addName(itemMPWand, "MPWand");
-		*/
-		
+
 		/**
 		 *TileEntity登録
 		 */
-		GameRegistry.registerTileEntity(BlockBank.class, "blockBank");
-		GameRegistry.registerTileEntity(BlockSafe.class, "blockSafe");
+		//GameRegistry.registerTileEntity(BlockBank.class, "blockBank");
+		GameRegistry.registerTileEntity(TileEntitySafe.class, "blockSafe");
 		/**
 		 *GUI追加
 		 */

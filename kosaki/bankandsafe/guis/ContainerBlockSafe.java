@@ -1,8 +1,11 @@
 package kosaki.bankandsafe.guis;
 
 import kosaki.bankandsafe.BankAndSafe;
+import kosaki.bankandsafe.tileentities.TileEntitySafe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ContainerBlockSafe extends Container
@@ -12,7 +15,7 @@ public class ContainerBlockSafe extends Container
 	private int xCoord;
 	private int yCoord;
 	private int zCoord;
-	
+
 	public ContainerBlockSafe(EntityPlayer player, World world, int x, int y, int z)
 	{
 		this.world  = world;
@@ -20,16 +23,16 @@ public class ContainerBlockSafe extends Container
 		this.yCoord = y;
 		this.zCoord = z;
 	}
-	
+
 	//スロット追加
-	public ContainerBlockSafe(EntityPlayer player, TileEntitySample par2TileEntity) {
+	public ContainerBlockSafe(EntityPlayer player, TileEntitySafe par2TileEntity) {
 		this.tileentitysafe = par2TileEntity;
 		// Inventoryで追加するインベントリ
-		this.addSlotToContainer(new Slot(this.tileentity, 0, 45, 51));
-		this.addSlotToContainer(new Slot(this.tileentity, 1, 45, 87));
-		this.addSlotToContainer(new Slot(this.tileentity, 2, 79, 51));
-		this.addSlotToContainer(new Slot(this.tileentity, 3, 79, 87));
-		
+		this.addSlotToContainer(new Slot(this.tileentitysafe, 0, 45, 51));
+		this.addSlotToContainer(new Slot(this.tileentitysafe, 1, 45, 87));
+		this.addSlotToContainer(new Slot(this.tileentitysafe, 2, 79, 51));
+		this.addSlotToContainer(new Slot(this.tileentitysafe, 3, 79, 87));
+
 		int i;
 		// 1 ～ 3段目のインベントリ
 		for (i = 0; i < 3; ++i)
@@ -45,13 +48,7 @@ public class ContainerBlockSafe extends Container
 			this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
 		}
 	}
-	
-	// Inventory内のisUseableByPlayerメソッド
-	@Override
-	public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-		return this.tileentitysafe.isUseableByPlayer(par1EntityPlayer);
-	}
-	
+
 	// Shiftクリック
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
@@ -105,7 +102,7 @@ public class ContainerBlockSafe extends Container
 		}
 		return itemstack;
 	}
-	
+
 	//開ける距離
 	@Override
 	public boolean canInteractWith(EntityPlayer entityPlayer)
