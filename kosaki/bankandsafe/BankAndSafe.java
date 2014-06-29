@@ -53,7 +53,9 @@ public class BankAndSafe
 	public static Item item100MP;
 	public static Item item1000MP;
 	public static Item itemMPWand;
+	public static Enchantment moreMPdrop;
 
+	//ID
 	public int blockBankID;
 	public int blockSafeID;
 	public int item100MPID;
@@ -63,6 +65,7 @@ public class BankAndSafe
 	public static final int bankGUIID = 1;
 	public static final int safeGUIID = 2;
 
+	//メッセージ
 	public static final String ITEM1000MP_TO_MP_MESSAGE = "Exchange to 1000MP is succeeded!";
 	public static final String ITEM100MP_TO_MP_MESSAGE = "Exchange to 100MP is succeeded!";
 	public static final String MP_TO_ITEM1000MP_MESSAGE = "Exchange to 1000MPItem is succeeded!";
@@ -70,8 +73,11 @@ public class BankAndSafe
 	public static final String MP_TO_ITEM100MP_MESSAGE = "Exchange to 100MPItem is succeeded!";
 	public static final String MP_TO_ITEM100MP_CANCEL_MESSAGE = "Exchange to 100MPItem is failed.";
 
+	//config関連
 	public static boolean textureSize;
 	public static int textureSizeFile;
+	public static boolean moreMPdropAdd;
+	public static int moreMPdropID;
 	public static boolean respawn0MP;
 	public static int respawnUseMP;
 	//public static boolean useIC2GregMP
@@ -117,6 +123,14 @@ public class BankAndSafe
 				textureSizeFile = 16;
 			}
 
+			//MP増加エンチャントを有効化するか
+			moreMPdropAdd = cfg.get(cfg.CATEGORY_GENERAL,
+						"Will Enchant [More MP Drop] be added?",
+						true).getBoolean(true);
+			//MP増加エンチャントのID
+			moreMPdropID = config.get(cfg.CATEGORY_GENERAL,
+						"moreMPdropID", 21).getInt();
+			
 			//リスポーン時に0MPにするかどうか
 			respawn0MP = cfg.get(cfg.CATEGORY_GENERAL,
 						"When you respawn, will the MP be 0?",
@@ -175,6 +189,13 @@ public class BankAndSafe
 	public void eventInit(FMLInitializationEvent e)
 	{
 		System.out.println("[BankAndSafe for MCEconomy] Setting up contents.");
+		/**
+		 *MP増加エンチャント
+		 */
+		if (moreMPdropAdd)
+		{
+			moreMPdrop = new EnchantmentMoreMPdrop(moreMPdropID, 2).setname("moreMPdrop");
+		}
 		/**
 		 *敵を倒したときのドロップMP
 		 */
