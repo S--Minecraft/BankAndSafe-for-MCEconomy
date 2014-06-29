@@ -27,8 +27,8 @@ public class ContainerBlockSafe extends Container
 		// Inventoryで追加するインベントリ
 		this.addSlotToContainer(new Slot(this.tileentity, 0, 45, 51));
 		this.addSlotToContainer(new Slot(this.tileentity, 1, 45, 87));
-		this.addSlotToContainer(new Slot(this.tileentity, 1, 79, 51));
-		this.addSlotToContainer(new Slot(this.tileentity, 1, 79, 87));
+		this.addSlotToContainer(new Slot(this.tileentity, 2, 79, 51));
+		this.addSlotToContainer(new Slot(this.tileentity, 3, 79, 87));
 		
 		int i;
 		// 1 ～ 3段目のインベントリ
@@ -62,48 +62,25 @@ public class ContainerBlockSafe extends Container
 		{
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
-			/*
-			//スロット番号が2の時
-			if (par2 == 2)
+			//スロット番号が1or3の時
+			if (par2 == 1 && par2 == 3)
 			{
-				//アイテムの移動(スロット3～39へ)
-				if (!this.mergeItemStack(itemstack1, 3, 39, true))
+				//アイテムの移動(スロット4～39へ)
+				if (!this.mergeItemStack(itemstack1, 4, 39, true))
 				{
 					return null;
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 			}
-			//スロット番号が0、1でない時
-			else if (par2 != 1 && par2 != 0)
+			//スロット番号が1or3でない時
+			else if (par2 != 1 && par2 != 3)
 			{
-				if (FurnaceRecipes.smelting().getSmeltingResult(itemstack1) != null)
-				{
-					//アイテムの移動(スロット0～1へ)
-					if (!this.mergeItemStack(itemstack1, 0, 1, false))
-					{
-						return null;
-					}
-				}
-				else if (TileEntityFurnace.isItemFuel(itemstack1))
-				{
-					//アイテムの移動(スロット1～2へ)
-					if (!this.mergeItemStack(itemstack1, 1, 2, false))
-					{
-						return null;
-					}
-				}
-				else if (par2 >= 3 && par2 < 30)
-				{
-					//アイテムの移動(スロット30～39へ)
-					if (!this.mergeItemStack(itemstack1, 30, 39, false))
-					{
-						return null;
-					}
-				}
-				else if (par2 >= 30 && par2 < 39 && !this.mergeItemStack(itemstack1, 3, 30, false))
+				//アイテムの移動(スロット1or3へ)
+				if (!this.mergeItemStack(itemstack1, 1, 1, false) && !this.mergeItemStack(itemstack1, 3, 3, false))
 				{
 					return null;
 				}
+				return null;
 			}
 			//アイテムの移動(スロット3～39へ)
 			else if (!this.mergeItemStack(itemstack1, 3, 39, false))
@@ -125,7 +102,6 @@ public class ContainerBlockSafe extends Container
 				return null;
 			}
 			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
-			*/
 		}
 		return itemstack;
 	}

@@ -2,7 +2,7 @@ package kosaki.bankandsafe.tileentities;
  
 import ...
  
-public class TileEntitySample extends TileEntity implements ISidedInventory
+public class TileEntitySafe extends TileEntity implements ISidedInventory
 {
 /*
 	private static final int slots_righttop = new int;

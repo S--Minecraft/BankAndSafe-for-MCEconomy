@@ -10,7 +10,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 public class SSPlugin
 {
 	private static World world = FMLClientHandler.instance().getClient().theWorld;
-	private static EntityPlayer entityPlayer/* = minecraft.thePlayer*/;
+	//private static EntityPlayer entityPlayer/* = minecraft.thePlayer*/;
 
 	public static void load()
 	{
@@ -19,7 +19,7 @@ public class SSPlugin
 		//ひと月あたり15MP
 		if(SextiarySectorAPI.getDay(world)==30)
 		{
-			MCEconomyAPI.addPlayerMP(entityPlayer, 15);
+			MCEconomyAPI.addPlayerMP(EntityPlayer entityPlayer, 15);
 		}
 
 		//ボーナスを追加

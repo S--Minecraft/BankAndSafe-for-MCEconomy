@@ -73,6 +73,7 @@ public class BankAndSafe
 	public static boolean textureSize;
 	public static int textureSizeFile;
 	public static boolean respawn0MP;
+	public static int respawnUseMP;
 	//public static boolean useIC2GregMP
 
 	/**
@@ -93,7 +94,7 @@ public class BankAndSafe
 			Property blockProp[]=
 			{
 				cfg.getBlock("blockBankID", 2550),
-				cfg.getBlock("blockSafeID", 2551),
+				cfg.getBlock("blockSafeID", 2551)
 			};
 			Property itemProp[]=
 			{
@@ -120,6 +121,11 @@ public class BankAndSafe
 			respawn0MP = cfg.get(cfg.CATEGORY_GENERAL,
 						"When you respawn, will the MP be 0?",
 						false).getBoolean(false);
+			//リスポーン時にMPを消費するかどうか
+			respawnUseMP = cfg.get(cfg.CATEGORY_GENERAL,
+						"When you respawn,how much MP will be needed?",
+						10).getInt();
+			
 			//IC2とGreg導入時、MPで商品を買えるのを許可するか
 			/*
 			useIC2GregMP = cfg.get(config.CATEGORY_GENERAL,
@@ -139,7 +145,9 @@ public class BankAndSafe
 		}
 		finally
 		{
-			cfg.save();
+			if (cfg.hasChanged()) {
+				cfg.save();
+			}
 		}
 
 		/**
@@ -172,19 +180,23 @@ public class BankAndSafe
 		 */
 		MinecraftForge.EVENT_BUS.register(new LivingDeathEventHandler());
 		/**
-		 *リスポーン時にMPを0にする/(ワールドに入ったときにMPが0未満だったときに0にする)
+		 *リスポーン時にMPを0にする/ワールドに入ったときにMPが0未満だったときに0にする
 		 */
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 		/**
 		 *言語登録
 		 */
-		//別クラス化のときは「(new LangRegister()).lang();」
 		System.out.println("[BankAndSafe for MCEconomy] Registering languages.");
+		Localization.addLocalization("/bankandsafe/lang/", DefaultProps.DEFAULT_LANGUAGE);
+		//別クラス化のときは「(new LangRegister()).lang();」
+		/*
 		LanguageRegistry.addName(blockBank, "MPBank");
 		LanguageRegistry.addName(blockSafe, "MPSafe");
 		LanguageRegistry.addName(item100MP, "100MP Coin");
 		LanguageRegistry.addName(item1000MP, "1000MP Bill");
 		LanguageRegistry.addName(itemMPWand, "MPWand");
+		*/
+		
 		/**
 		 *TileEntity登録
 		 */

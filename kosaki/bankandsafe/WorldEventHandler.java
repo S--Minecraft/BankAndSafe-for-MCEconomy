@@ -4,7 +4,6 @@ import mceconomy.api.MCEconomyAPI;
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.IPlayerTracker;
 
-//public class WorldEventHandler
 public class WorldEventHandler implements IPlayerTracker
 {
 	//@ForgeSubscribe
@@ -39,13 +38,26 @@ public class WorldEventHandler implements IPlayerTracker
 		}
 	}
 
-	//リスポーン時にMPを0にする(configから変更可)
+	//リスポーン時にMPを0にする/MPを消費する(configから変更可)
 	@Override
 	public void onPlayerRespawn(EntityPlayer entityPlayer)
 	{
+		
 		if(BankAndSafe.respawn0MP)
 		{
+			//respawn0MPがtrueならリスポーン時にMPを0にする
 			MCEconomyAPI.setPlayerMP(entityPlayer,0);
+		}
+		else if(BankAndSafe.respawnUseMP>0)
+		{
+			//respawnUseMPが1以上ならリスポーン時にMPをrespawnUseMPだけ引く
+			if(MCEconomyAPI.getPlayerMP(entityPlayer) > BankAndSafe.respawnUseMP)
+			{
+				MCEconomyAPI.reducePlayerMP(entityPlayer, BankAndSafe.respawnUseMP)
+			}else{
+				//一応マイナスになるのを回避
+				MCEconomyAPI.setPlayerMP(entityPlayer,0)
+			}
 		}
 	}
 
