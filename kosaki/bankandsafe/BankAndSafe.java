@@ -52,6 +52,7 @@ public class BankAndSafe
 	public static final CreativeTabs tabBankAndSafe = new CreativeTabBankAndSafe("BankAndSafe");
 	public static Block blockBank;
 	public static Block blockSafe;
+	//public static Block blockMP;
 	public static Item item100MP;
 	public static Item item1000MP;
 	public static Item itemMPWand;
@@ -60,6 +61,7 @@ public class BankAndSafe
 	//ID
 	public int blockBankID;
 	public int blockSafeID;
+	//public int blockMPID;
 	public int item100MPID;
 	public int item1000MPID;
 	public int itemMPWandID;
@@ -103,6 +105,7 @@ public class BankAndSafe
 			{
 				cfg.getBlock("blockBankID", 2550),
 				cfg.getBlock("blockSafeID", 2551)
+				//,cfg.getBlock("blockMPID", 2552)
 			};
 			Property itemProp[]=
 			{
@@ -151,6 +154,7 @@ public class BankAndSafe
 
 			blockBankID=blockProp[0].getInt();
 			blockSafeID=blockProp[1].getInt();
+			//blockMPID=blockProp[2].getInt();
 			item100MPID=itemProp[0].getInt();
 			item1000MPID=itemProp[1].getInt();
 			itemMPWandID=itemProp[2].getInt();
@@ -173,12 +177,14 @@ public class BankAndSafe
 		System.out.println("[BankAndSafe for MCEconomy] Adding blocks and items.");
 		blockBank = new BlockBank(blockBankID, Material.iron);
 		//blockSafe = new BlockSafe(blockSafeID, Material.iron);
+		//blockMP = new BlockMP(blockMPID, Material.sponge)
 		item100MP = new Item100MP(item100MPID-256);
 		item1000MP = new Item1000MP(item1000MPID-256);
 		itemMPWand = new ItemMPWand(itemMPWandID-256);
 
 		GameRegistry.registerBlock(blockBank, "blockBank");
 		GameRegistry.registerBlock(blockSafe, "blockSafe");
+		//GameRegistry.registerBlock(blockMP, ItemBlockMP.class, "blockMP");
 		GameRegistry.registerItem(item100MP, "item100MP");
 		GameRegistry.registerItem(item1000MP, "item1000MP");
 		GameRegistry.registerItem(itemMPWand, "itemMPWand");
@@ -215,6 +221,8 @@ public class BankAndSafe
 
 		LanguageRegistry.addName(blockBank, "MPBank");
 		LanguageRegistry.addName(blockSafe, "MPSafe");
+		//LanguageRegistry.addName(new ItemStack(blockMP, 1, 0), "100MP Coin Block");
+		//LanguageRegistry.addName(new ItemStack(blockMP, 1, 4), "1000MP Bill Block");
 		LanguageRegistry.addName(item100MP, "100MP Coin");
 		LanguageRegistry.addName(item1000MP, "1000MP Bill");
 		LanguageRegistry.addName(itemMPWand, "MPWand");
