@@ -1,4 +1,3 @@
-/*
 package kosaki.bankandsafe.blocks;
 
 import kosaki.bankandsafe.BankAndSafe;
@@ -16,7 +15,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSafe extends TileEntity
+public class BlockSafe extends BlockContainer
 {
 	@SideOnly(Side.CLIENT)
 	private Icon frontIcon;
@@ -32,7 +31,8 @@ public class BlockSafe extends TileEntity
 
 	/**
 	 *GUI
-	 *//*
+	 */
+	/*
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float disX, float disY, float disZ)
 	{
 		//GUIを開く
@@ -42,18 +42,28 @@ public class BlockSafe extends TileEntity
 		}
 		return true;
 	}
+	*/
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are)	{
+		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+		if (tileEntity == null || player.isSneaking()) {
+			return false;
+		}
+		//GUiを開く
+        player.openGui(BankAndSafe.instance, BankAndSafe.safeGUIID, world, x, y, z);
+        return true;
+        }
 
 	/**
 	 *コンテナ関連
 	 */
 	//TileEntity生成
-/*
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntity();
+		return new TileEntitySafe();
 	}
-*/
+	
 	//ブロックが壊れたら、中のアイテムをまき散らす
-/*
+	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
 	{
 		TileEntity tileentity = (TileEntity) par1World.getBlockTileEntity(par2, par3, par4);
@@ -97,7 +107,7 @@ public class BlockSafe extends TileEntity
 
 	/**
 	 *テクスチャ
-	 *//*
+	 */
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
 	{
 		//向きがあるように設定・東西南北固定をなくす
@@ -133,4 +143,3 @@ public class BlockSafe extends TileEntity
 		this.frontIcon = par1IconRegister.registerIcon("bankandsafe:Safe - " + BankAndSafe.textureSizeFile);
 	}
 }
-*/

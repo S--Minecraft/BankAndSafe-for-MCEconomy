@@ -10,6 +10,8 @@ import net.minecraft.world.World;
 
 public class ContainerBlockSafe extends Container
 {
+	private InventoryPlayer playerInventory;
+	private IInventory guiInventory = new InventoryBasic("slots", false, 4);
 	private TileEntitySafe tileentitysafe;
 	private World world;
 	private int xCoord;

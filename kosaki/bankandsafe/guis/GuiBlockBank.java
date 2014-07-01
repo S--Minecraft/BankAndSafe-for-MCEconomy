@@ -33,4 +33,29 @@ public class GuiBlockBank extends GuiContainer
 		int yStart = height - ySize >> 1;
 		drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 	}
+	
+	//ボタン追加
+	/*
+	@Override
+	public void initGui() {
+		super.initGui();
+		//make buttons
+					//id, x, y, width, height, text
+		controlList.add(new GuiButton(1, 10, 52, 20, 20, "+"));
+		controlList.add(new GuiButton(2, 40, 72, 20, 20, "-"));
+	}
+
+	protected void actionPerformed(GuiButton guibutton) {
+		//id is the id you give your button
+		switch(guibutton.id) {
+		case 1:
+			i += 1;
+			break;
+		case 2:
+			i -= 1;
+		}
+		//Packet code here
+		//PacketDispatcher.sendPacketToServer(packet); //send packet
+	}
+	*/
 }

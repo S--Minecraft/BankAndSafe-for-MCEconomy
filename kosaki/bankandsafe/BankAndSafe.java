@@ -183,7 +183,7 @@ public class BankAndSafe
 		itemMPWand = new ItemMPWand(itemMPWandID-256);
 
 		GameRegistry.registerBlock(blockBank, "blockBank");
-		GameRegistry.registerBlock(blockSafe, "blockSafe");
+		GameRegistry.registerBlock(blockSafe, ItemBlockSafe.class, "blockSafe");
 		//GameRegistry.registerBlock(blockMP, ItemBlockMP.class, "blockMP");
 		GameRegistry.registerItem(item100MP, "item100MP");
 		GameRegistry.registerItem(item1000MP, "item1000MP");
@@ -218,7 +218,6 @@ public class BankAndSafe
 		System.out.println("[BankAndSafe for MCEconomy] Registering languages.");
 		//Localization.addLocalization("/bankandsafe/lang/", DefaultProps.DEFAULT_LANGUAGE);
 		//別クラス化のときは「(new LangRegister()).lang();」
-
 		LanguageRegistry.addName(blockBank, "MPBank");
 		LanguageRegistry.addName(blockSafe, "MPSafe");
 		//LanguageRegistry.addName(new ItemStack(blockMP, 1, 0), "100MP Coin Block");
@@ -231,7 +230,7 @@ public class BankAndSafe
 		 *TileEntity登録
 		 */
 		//GameRegistry.registerTileEntity(BlockBank.class, "blockBank");
-		GameRegistry.registerTileEntity(TileEntitySafe.class, "blockSafe");
+		GameRegistry.registerTileEntity(TileEntitySafe.class, "containerSafe");
 		/**
 		 *GUI追加
 		 */
