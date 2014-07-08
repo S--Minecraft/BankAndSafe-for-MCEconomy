@@ -57,7 +57,6 @@ public class BlockBank extends Block
 	public Icon getIcon(int par1, int par2)
 	{
 		//表示面の方向を決定
-		//return par1 == 1 ? this.blockIcon : (par1 == 0 ? this.blockIcon : (par2 == 2 && par1 == 2 ? this.blockFront : (par2 == 3 && par1 == 5 ? this.blockFront : (par2 == 0 && par1 == 3 ? this.blockFront : (par2 == 1 && par1 == 4 ? this.blockFront : this.blockIcon)))));
 		if(par1==0 || par1==1)
 		{
 			return blockIcon;

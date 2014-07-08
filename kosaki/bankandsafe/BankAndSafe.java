@@ -34,7 +34,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 	modid="BankAndSafe",
 	name="BankAndSafe for MCEconomy",
 	version="0.0.1_Alpha",
-	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,);"/*required-after:MCEconomy;);"*/
+	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,);required-after:MCEconomy"
 	//after:IC2;after:Forestry;after:SextiarySector;
 )
 @NetworkMod
@@ -49,6 +49,9 @@ public class BankAndSafe
 	 */
 	@Instance("BankAndSafe for MCEconomy")
 	public static BankAndSafe instance;
+	
+	BASLogger.BASLoading("Start loading...");
+	
 	public static final CreativeTabs tabBankAndSafe = new CreativeTabBankAndSafe("BankAndSafe");
 	public static Block blockBank;
 	public static Block blockSafe;
@@ -96,6 +99,7 @@ public class BankAndSafe
 		/**
 		 *Config作成・設定
 		 */
+		BASLogger.BASLoading("Now loading config.")
 		Configuration cfg=new Configuration(e.getSuggestedConfigurationFile());
 		try
 		{
@@ -174,7 +178,7 @@ public class BankAndSafe
 		 *Block・Item追加
 		 */
 		//別クラス化のときは「(new クラス名()).registerBlocks();」
-		System.out.println("[BankAndSafe for MCEconomy] Adding blocks and items.");
+		BASLogger.BASLoading("Now registering Blocks and Items.");
 		blockBank = new BlockBank(blockBankID, Material.iron);
 		//blockSafe = new BlockSafe(blockSafeID, Material.iron);
 		//blockMP = new BlockMP(blockMPID, Material.sponge)
@@ -196,7 +200,7 @@ public class BankAndSafe
 	@EventHandler
 	public void eventInit(FMLInitializationEvent e)
 	{
-		System.out.println("[BankAndSafe for MCEconomy] Setting up contents.");
+		BASLogger.BASLoading("Now setting up contents.");
 		/**
 		 *MP増加エンチャント
 		 */
@@ -243,19 +247,20 @@ public class BankAndSafe
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e)
 	{
-		System.out.println("[BankAndSafe for MCEconomy] Setting up plugins.");
+		BASLogger.BASLoading("Start setting up plugins.");
 		/*
 		if (Loader.isModLoaded("SextiarySector"))
 		{
-			System.out.println("[BankAndSafe]Now checking SextiarySector");
+			BASLogger.checkingMod("SextiarySector");
 			try
 			{
 				//SS連携読み込み
-				System.out.println("[BankAndSafe]Successfully Loaded SextiarySector Plugin");
+				BASLogger.loadedMod("SextiarySector");
 				SSPlugin.load();
 			}
 			catch (Exception e1)
 			{
+				BASLogger.failedMod("SextiarySector");
 				System.out.println("[BankAndSafe]Failed to check SextiarySector");
 				e1.printStackTrace(System.err);
 			}
@@ -265,38 +270,38 @@ public class BankAndSafe
 		/*
 		if(Loader.isModLoaded("IC2"))
 		{
-			System.out.println("[BankAndSafe]Now checking for IndustrialCraft2");
+			BASLogger.checkingMod("IndustrialCraft2");
 			if(Loader.isModLoaded("gregtech_addon") && BankAndSafe.useIC2GregMP)
 			{
 				try
 				{
 					//Configオン+IC2+Gregで読み込み
-					System.out.println("[BankAndSafe]Successfully Loaded IndustrialCraft2 Plugin");
+					BASLogger.loadedMod("IndustrialCraft2");
 					IC2Plugin.load();
 				}
 				catch (Exception e2)
 				{
-					System.out.println("[BankAndSafe]Failed to check for IndustrialCraft2");
+					BASLogger.failedMod("IndustrialCraft2");
 					e.printStackTrace(System.err);
 				}
 			}
 			else if(Load.isModLoaded("gregtech_addon") && !BankAndSafe.useIC2GregMP)
 			{
 				//Configオフ+IC2+Greg、読み込みなし
-				System.out.println("[BankAndSafe]Won't check for IndustrialCraft2");
-				System.out.println("[BankAndSafe]If you wanna buy the IndustrialCraft2's Items, change the config useIC2GregMP to true.");
+				BASLogger.log("Won't check for IndustrialCraft2");
+				BASLogger.log("If you wanna buy the IndustrialCraft2's Items, change the config useIC2GregMP to true");
 			}
 			else
 			{
 				try
 				{
 					//IC2連携読み込み
-					System.out.println("[BankAndSafe]Successfully Loaded IndustrialCraft2 Plugin");
+					BASLogger.loadedMod("IndustrialCraft2");
 					IC2Plugin.load();
 				}
 				catch (Exception e3)
 				{
-					System.out.println("[BankAndSafe]Failed to check for IndustrialCraft2");
+					BASLogger.failedMod("IndustrialCraft2");
 					e.printStackTrace(System.err);
 				}
 			}
@@ -304,32 +309,32 @@ public class BankAndSafe
 
 		if(Loader.isModLoaded("BuildCraft|Core"))
 		{
-			System.out.println("[BankAndSafe]Now checking for BuildCraft");
+			BASLogger.checkingMod("BuildCraft");
 			try
 			{
 				//BC連携読み込み
-				System.out.println("[BankAndSafe]Successfully Loaded BuildCraft Plugin");
+				BASLogger.loadedMod("BuildCraft");
 				BCPlugin.load();
 			}
 			catch (Exception e4)
 			{
-				System.out.println("[BankAndSafe]Failed to check for BuildCraft");
+				BASLogger.failedMod("BuildCraft");
 				e.printStackTrace(System.err);
 			}
 		}
 
 		if(Loader.isModLoaded("EnderIO"))
 		{
-			System.out.println("[BankAndSafe]Now checking for EnderIO");
+			BASLogger.checkingMod("EnderIO")
 			try
 			{
 				//EIO連携読み込み
-				System.out.println("[BankAndSafe]Successfully Loaded EndeIO Plugin");
+				BASLogger.loadedMod("EnderIO");
 				EIOPlugin.load();
 			}
 			catch (Exception e5)
 			{
-				System.out.println("[BankAndSafe]Failed to check for EnderIO");
+				BASLogger.failedMod("EnderIO");
 				e.printStackTrace(System.err);
 			}
 		}*/
