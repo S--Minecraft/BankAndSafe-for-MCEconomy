@@ -18,14 +18,17 @@ public class GuiBlockSafe extends GuiContainer
 		super(new ContainerBlockSafe(player, world, x, y, z));
 	}
 
-	protected void drawGuiContainerForegroundLayer()
+	@Override
+	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
+		//文字の部分
 		fontRenderer.drawString("Safe", 58, 6, 0x404040);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
+		//GUI画像の位置
 		this.mc.getTextureManager().bindTexture(new ResourceLocation ("bankandsafe", "textures/gui/guiSafe.png"));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int xStart = width - xSize >> 1;
