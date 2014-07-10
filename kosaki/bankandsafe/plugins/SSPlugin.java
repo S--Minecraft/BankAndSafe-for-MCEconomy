@@ -9,13 +9,8 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 public class SSPlugin
 {
-<<<<<<< HEAD
-	private static World world = FMLClientHandler.instance().getClient().theWorld
-	private static EntityPlayer entityPlayer = minecraft.thePlayer;
-=======
 	private static World world = FMLClientHandler.instance().getClient().theWorld;
 	private static EntityPlayer entityPlayer/* = minecraft.thePlayer*/;
->>>>>>> b52d1d1b51fc073249b875369acd55494cad05d3
 
 	public static void load()
 	{
@@ -40,6 +35,6 @@ public class SSPlugin
 		}
 
 		//トロフィー取得時にMP取得
-		
+
 	}
 }

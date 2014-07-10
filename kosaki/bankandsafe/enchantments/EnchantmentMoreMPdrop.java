@@ -10,21 +10,25 @@ public class EnchantmentMoreMPdrop extends Enchantment
 		super(id, weight, EnumEnchantmentType.weapon);
 	}
 
+	@Override
 	public int getMaxLevel()
 	{
 		return 3;
 	}
 
+	@Override
 	public int getMinEnchantability(int par1)
 	{
 		return 15 + (par1 - 1) * 12;
 	}
 
+	@Override
 	public int getMaxEnchantability(int par1)
 	{
 		return getMinEnchantability(par1) + 60;
 	}
 
+	@Override
 	public boolean canApplyTogether(Enchantment enchantment)
 	{
 		return super.canApplyTogether(enchantment) && enchantment.effectId != looting.effectId;

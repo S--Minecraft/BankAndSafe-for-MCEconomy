@@ -16,12 +16,12 @@ public class BASLogger {
 
 	public static void loadedMod(String modid) {
 		logger.setParent(FMLLog.getLogger());
-		logger.log(Level.FINER, "Mod Plugin Load : Succeeded loaded " + modName + " plugin");
+		logger.log(Level.FINER, "Mod Plugin Load : Succeeded loaded " + modid + " plugin");
 	}
 
 	public static void failedMod(String modid) {
 		logger.setParent(FMLLog.getLogger());
-		logger.log(Level.FINER, "Mod Plugin Load : Failed to check for " + modName);
+		logger.log(Level.FINER, "Mod Plugin Load : Failed to check for " + modid);
 	}
 
 	public static void otherLog(String aString) {

@@ -3,6 +3,7 @@ package kosaki.bankandsafe;
 import java.util.logging.Level;
 
 import kosaki.bankandsafe.blocks.BlockBank;
+import kosaki.bankandsafe.blocks.BlockSafe;
 import kosaki.bankandsafe.creativetabs.CreativeTabBankAndSafe;
 import kosaki.bankandsafe.enchantments.EnchantmentMoreMPdrop;
 import kosaki.bankandsafe.items.Item1000MP;
@@ -34,11 +35,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 	modid="BankAndSafe",
 	name="BankAndSafe for MCEconomy",
 	version="0.0.1_Alpha",
-<<<<<<< HEAD
-	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,;required-after:MCEconomy;);"
-=======
+	//dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,;required-after:MCEconomy;);"
 	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,);required-after:MCEconomy"
->>>>>>> b52d1d1b51fc073249b875369acd55494cad05d3
 	//after:IC2;after:Forestry;after:SextiarySector;
 )
 @NetworkMod
@@ -53,9 +51,7 @@ public class BankAndSafe
 	 */
 	@Instance("BankAndSafe for MCEconomy")
 	public static BankAndSafe instance;
-	
-	BASLogger.BASLoading("Start loading...");
-	
+
 	public static final CreativeTabs tabBankAndSafe = new CreativeTabBankAndSafe("BankAndSafe");
 	public static Block blockBank;
 	public static Block blockSafe;
@@ -72,11 +68,6 @@ public class BankAndSafe
 	public int item100MPID;
 	public int item1000MPID;
 	public int itemMPWandID;
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> b52d1d1b51fc073249b875369acd55494cad05d3
 	public static final int bankGUIID = 1;
 	public static final int safeGUIID = 2;
 
@@ -103,11 +94,12 @@ public class BankAndSafe
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e)
 	{
-		//System.out.println("Why can't I screen the GUI!!!");
+		BASLogger.BASLoading("Start loading...");
+
 		/**
 		 *Config作成・設定
 		 */
-		BASLogger.BASLoading("Now loading config.")
+		BASLogger.BASLoading("Now loading config.");
 		Configuration cfg=new Configuration(e.getSuggestedConfigurationFile());
 		try
 		{
@@ -116,25 +108,9 @@ public class BankAndSafe
 			Property blockProp[]=
 			{
 				cfg.getBlock("blockBankID", 2550),
-<<<<<<< HEAD
 				cfg.getBlock("blockSafeID", 2551),
-				};
-			Property itemProp[]={
-				cfg.getItem("item100MPID",12756),
-				cfg.getItem("item1000MPID",12757),
-				cfg.getItem("itemMPWandID",12758)
-				};
-			
-			//テクスチャx16 or x32
-			textureSize = cfg.get(config.CATEGORY_GENERAL,
-						"Will you use x32 for the texture?",
-						false).getBoolean(false);
-=======
-				cfg.getBlock("blockSafeID", 2551)
-				//,cfg.getBlock("blockMPID", 2552)
 			};
-			Property itemProp[]=
-			{
+			Property itemProp[]={
 				cfg.getItem("item100MPID",12756),
 				cfg.getItem("item1000MPID",12757),
 				cfg.getItem("itemMPWandID",12758)
@@ -143,20 +119,13 @@ public class BankAndSafe
 
 			//テクスチャx16 or x32
 			textureSize = cfg.get(cfg.CATEGORY_GENERAL,
-									"Will you use x32 for the texture?",
-									false).getBoolean(false);
->>>>>>> b52d1d1b51fc073249b875369acd55494cad05d3
+						"Will you use x32 for the texture?",
+						false).getBoolean(false);
+				//cfg.getBlock("blockMPID", 2552)
 			if(textureSize)
 			{
 				textureSizeFile = 32;
 			}
-<<<<<<< HEAD
-			
-			//リスポーン時に0MPにするかどうか
-			respawn0MP = cfg.get(config.CATEGORY_GENERAL,
-						"When you respawn, will the MP be 0?",
-						false).getBoolean(false);
-=======
 			else
 			{
 				textureSizeFile = 16;
@@ -168,7 +137,7 @@ public class BankAndSafe
 						true).getBoolean(true);
 			//MP増加エンチャントのID
 			moreMPdropID = cfg.get(cfg.CATEGORY_GENERAL,
-						"moreMPdropID", 21).getInt();
+						"moreMPdropID", 255).getInt();
 
 			//リスポーン時に0MPにするかどうか
 			respawn0MP = cfg.get(cfg.CATEGORY_GENERAL,
@@ -178,22 +147,12 @@ public class BankAndSafe
 			respawnUseMP = cfg.get(cfg.CATEGORY_GENERAL,
 						"When you respawn,how much MP will be needed?",
 						10).getInt();
-
->>>>>>> b52d1d1b51fc073249b875369acd55494cad05d3
 			//IC2とGreg導入時、MPで商品を買えるのを許可するか
 			/*
 			useIC2GregMP = cfg.get(config.CATEGORY_GENERAL,
 						"When you are using Gregtech, can you buy the IC2 block with MP?",
 						false).getBoolean(false);
 			*/
-<<<<<<< HEAD
-			
-			//blockProp.comment="EUTeleporter's BlockID";
-			itemProp.comment="These are minused 256.So it's the real id.";
-			
-=======
-
->>>>>>> b52d1d1b51fc073249b875369acd55494cad05d3
 			blockBankID=blockProp[0].getInt();
 			blockSafeID=blockProp[1].getInt();
 			//blockMPID=blockProp[2].getInt();
@@ -207,7 +166,8 @@ public class BankAndSafe
 		}
 		finally
 		{
-			if (cfg.hasChanged()) {
+			if (cfg.hasChanged())
+			{
 				cfg.save();
 			}
 		}
@@ -216,27 +176,21 @@ public class BankAndSafe
 		 *Block・Item追加
 		 */
 		//別クラス化のときは「(new クラス名()).registerBlocks();」
-<<<<<<< HEAD
-		System.out.println("[BankAndSafe for MCEconomy] Adding blocks and items.");
-=======
+		//System.out.println("[BankAndSafe for MCEconomy] Adding blocks and items.");
 		BASLogger.BASLoading("Now registering Blocks and Items.");
->>>>>>> b52d1d1b51fc073249b875369acd55494cad05d3
-		blockBank = new BlockBank(blockBankID, Material.iron);
-		//blockSafe = new BlockSafe(blockSafeID, Material.iron);
+		/*blockBank = new BlockBank(blockBankID, Material.iron);
+		blockSafe = new BlockSafe(blockSafeID, Material.iron);
 		//blockMP = new BlockMP(blockMPID, Material.sponge)
 		item100MP = new Item100MP(item100MPID-256);
 		item1000MP = new Item1000MP(item1000MPID-256);
 		itemMPWand = new ItemMPWand(itemMPWandID-256);
-<<<<<<< HEAD
-=======
-
->>>>>>> b52d1d1b51fc073249b875369acd55494cad05d3
 		GameRegistry.registerBlock(blockBank, "blockBank");
-		GameRegistry.registerBlock(blockSafe, ItemBlockSafe.class, "blockSafe");
+		//GameRegistry.registerBlock(blockSafe, ItemBlockSafe.class, "blockSafe");
+		GameRegistry.registerBlock(blockSafe, "blockSafe");
 		//GameRegistry.registerBlock(blockMP, ItemBlockMP.class, "blockMP");
 		GameRegistry.registerItem(item100MP, "item100MP");
 		GameRegistry.registerItem(item1000MP, "item1000MP");
-		GameRegistry.registerItem(itemMPWand, "itemMPWand");
+		GameRegistry.registerItem(itemMPWand, "itemMPWand");*/
 	}
 
 	/**
@@ -245,28 +199,35 @@ public class BankAndSafe
 	@EventHandler
 	public void eventInit(FMLInitializationEvent e)
 	{
-<<<<<<< HEAD
-		System.out.println("[BankAndSafe for MCEconomy] Setting up contents.");
-=======
+		//System.out.println("[BankAndSafe for MCEconomy] Setting up contents.");
 		BASLogger.BASLoading("Now setting up contents.");
+		blockBank = new BlockBank(blockBankID, Material.iron);
+		blockSafe = new BlockSafe(blockSafeID, Material.iron);
+		//blockMP = new BlockMP(blockMPID, Material.sponge)
+		item100MP = new Item100MP(item100MPID-256);
+		item1000MP = new Item1000MP(item1000MPID-256);
+		itemMPWand = new ItemMPWand(itemMPWandID-256);
+		GameRegistry.registerBlock(blockBank, "blockBank");
+		//GameRegistry.registerBlock(blockSafe, ItemBlockSafe.class, "blockSafe");
+		GameRegistry.registerBlock(blockSafe, "blockSafe");
+		//GameRegistry.registerBlock(blockMP, ItemBlockMP.class, "blockMP");
+		GameRegistry.registerItem(item100MP, "item100MP");
+		GameRegistry.registerItem(item1000MP, "item1000MP");
+		GameRegistry.registerItem(itemMPWand, "itemMPWand");
+
 		/**
 		 *MP増加エンチャント
 		 */
 		if (moreMPdropAdd)
 		{
-			moreMPdrop = new EnchantmentMoreMPdrop(moreMPdropID, 2).setName("moreMPdrop");
+			moreMPdrop = (new EnchantmentMoreMPdrop(moreMPdropID, 2)).setName("moreMPdrop");
 		}
->>>>>>> b52d1d1b51fc073249b875369acd55494cad05d3
 		/**
 		 *敵を倒したときのドロップMP
 		 */
 		MinecraftForge.EVENT_BUS.register(new LivingDeathEventHandler());
 		/**
-<<<<<<< HEAD
-		 *リスポーン時にMPを0にする/(ワールドに入ったときにMPが0未満だったときに0にする)
-=======
 		 *リスポーン時にMPを0にする/ワールドに入ったときにMPが0未満だったときに0にする
->>>>>>> b52d1d1b51fc073249b875369acd55494cad05d3
 		 */
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 		/**
@@ -293,31 +254,19 @@ public class BankAndSafe
 		 */
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 		/**
-		 *言語登録
+		 * エンチャント登録
 		 */
-		//別クラス化のときは「(new LangRegister()).lang();」
-		System.out.println("[BankAndSafe for MCEconomy] Registering languages.");
-		LanguageRegistry.addName(blockBank, "MPBank");
-		LanguageRegistry.addName(blockSafe, "MPSafe");
-		LanguageRegistry.addName(item100MP, "100MP Coin");
-		LanguageRegistry.addName(item1000MP, "1000MP Bill");
-		LanguageRegistry.addName(itemMPWand, "MPWand");
-
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	/**
 	 *PostInit
 	 */
 	@EventHandler
-<<<<<<< HEAD
     public void postInit(FMLPostInitializationEvent e)
     {
-		System.out.println("[BankAndSafe for MCEconomy] Setting up plugins.");
-=======
-	public void postInit(FMLPostInitializationEvent e)
-	{
+		//System.out.println("[BankAndSafe for MCEconomy] Setting up plugins.");
 		BASLogger.BASLoading("Start setting up plugins.");
->>>>>>> b52d1d1b51fc073249b875369acd55494cad05d3
 		/*
 		if (Loader.isModLoaded("SextiarySector"))
 		{
@@ -408,5 +357,5 @@ public class BankAndSafe
 				e.printStackTrace(System.err);
 			}
 		}*/
-	}
+    }
 }
