@@ -39,7 +39,9 @@ public class ItemMPWand extends Item
 			if (!world.isRemote)
 			{
 				if (player != null)
-				player.addChatMessage(BankAndSafe.MP_TO_ITEM1000MP_MESSAGE);
+				{
+					player.addChatMessage(BankAndSafe.MP_TO_ITEM1000MP_MESSAGE);
+				}
 			}
 		}
 		else
@@ -88,10 +90,11 @@ public class ItemMPWand extends Item
 			if (!par3World.isRemote)
 			{
 				if (par2EntityPlayer != null)
-				par2EntityPlayer.addChatMessage(BankAndSafe.MP_TO_ITEM100MP_CANCEL_MESSAGE);
+				{
+					par2EntityPlayer.addChatMessage(BankAndSafe.MP_TO_ITEM100MP_CANCEL_MESSAGE);
+				}
 			}
 		}
-
         return false;
     }
 }

@@ -17,7 +17,6 @@ public class BlockBank extends Block
 {
 	@SideOnly(Side.CLIENT)
 	private Icon frontIcon;
-	private Icon blockIcon;
 
 	public BlockBank(int par1, Material par2Material)
 	{

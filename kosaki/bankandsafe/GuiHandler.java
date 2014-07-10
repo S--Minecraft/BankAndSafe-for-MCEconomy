@@ -13,16 +13,18 @@ public class GuiHandler implements IGuiHandler
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
-		if(!world.blockExists(x.y.z))
+		if(!world.blockExists(x,y,z))
+		{
 				return null;
-		
+		}
+
 		if (ID == BankAndSafe.bankGUIID)
 		{
-			return new GuiBlockBank(player.inventory, world, x, y, z);
+			return new GuiBlockBank(player, world, x, y, z);
 		}
 		else if(ID == BankAndSafe.safeGUIID)
 		{
-			return new GuiBlockSafe(player.inventory, world, x, y, z);
+			return new GuiBlockSafe(player, world, x, y, z);
 		}
 		return null;
 	}
@@ -31,15 +33,17 @@ public class GuiHandler implements IGuiHandler
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
 		if(!world.blockExists(x,y,z))
+		{
 				return null;
-		
+		}
+
 		if (ID == BankAndSafe.bankGUIID)
 		{
-			return new ContainerBlockBank(player.inventory, world, x, y, z);
+			return new ContainerBlockBank(player, world, x, y, z);
 		}
 		else if(ID == BankAndSafe.safeGUIID)
 		{
-			return new ContainerBlockSafe(player.inventory, world, x, y, z);
+			return new ContainerBlockSafe(player, world, x, y, z);
 		}
 		return null;
 	}

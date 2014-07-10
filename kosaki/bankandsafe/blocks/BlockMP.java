@@ -1,11 +1,14 @@
 package kosaki.bankandsafe.blocks;
 
+import java.util.List;
+import java.util.Random;
+
 import kosaki.bankandsafe.BankAndSafe;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
@@ -37,9 +40,15 @@ public class BlockMP extends Block
 		//ブロックを壊した時にドロップするもの
 		if(metadata<4)
 		{
-			return this.blockID.0;
-		}else if(metadata>3){
-			return this.blockID.4;
+			return this.blockID;
+		}
+		else if(4<metadata)
+		{
+			return this.blockID;
+		}
+		else
+		{
+			return 0;
 		}
 	}
 
@@ -73,13 +82,14 @@ public class BlockMP extends Block
 		//0&1:0～16=Other 2:2,5:3,3:0,4:1,
 		//表示面の方向を決定
 		//return par1 == 1 ? this.blockIcon : (par1 == 0 ? this.blockIcon : (par2 == 2 && par1 == 2 ? this.blockFront : (par2 == 3 && par1 == 5 ? this.blockFront : (par2 == 0 && par1 == 3 ? this.blockFront : (par2 == 1 && par1 == 4 ? this.blockFront : this.blockIcon)))));
-		
+
 		if(par2<4)
 		{
 			//100MPCoinBlock
 		}else{
 			//1000MPBillClock
 		}
+		return this.blockIcon;
 	}
 
 	@Override
@@ -88,11 +98,11 @@ public class BlockMP extends Block
 	{
 		//表示面のテクスチャの設定
 		//TopBottomIcon0:上下0　SideIcon01:横0　SideIcon02　TopBottomIcon1:上下1　SideIcon11:横1　SideIcon12
-		this.TopBottomIcon0 = par1IconRegister.registerIcon("bankandsafe:100MP1 - " + BankAndSafe.textureSizeFile);
+		/*this.TopBottomIcon0 = par1IconRegister.registerIcon("bankandsafe:100MP1 - " + BankAndSafe.textureSizeFile);
 		this.SideIcon01 = par1IconRegister.registerIcon("bankandsafe:100MP2 - " + BankAndSafe.textureSizeFile);
 		this.SideIcon02 = par1IconRegister.registerIcon("bankandsafe:100MP3 - " + BankAndSafe.textureSizeFile);
 		this.TopBottomIcon1 = par1IconRegister.registerIcon("bankandsafe:1000MP1 - " + BankAndSafe.textureSizeFile);
 		this.SideIcon11 = par1IconRegister.registerIcon("bankandsafe:1000MP2 - " + BankAndSafe.textureSizeFile);
-		this.SideIcon12 = par1IconRegister.registerIcon("bankandsafe:1000MP3 - " + BankAndSafe.textureSizeFile);
+		this.SideIcon12 = par1IconRegister.registerIcon("bankandsafe:1000MP3 - " + BankAndSafe.textureSizeFile);*/
 	}
 }
