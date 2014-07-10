@@ -35,6 +35,23 @@ public class BlockMP extends Block
 	 *メタデータ
 	 */
 	@Override
+	public int damageDroppped(int metadata)
+	{
+		//ブロックを壊した時にドロップするもの
+		if(metadata<4)
+		{
+			return 0;
+		}
+		else if(3<metadata && metadata<8)
+		{
+			return 4;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	/*
 	public int idDropped(int metadata, Random rand, int fortune)
 	{
 		//ブロックを壊した時にドロップするもの
@@ -51,6 +68,7 @@ public class BlockMP extends Block
 			return 0;
 		}
 	}
+	*/
 
 	@Override
 	@SideOnly(Side.CLIENT)
