@@ -14,14 +14,14 @@ public class BASLogger {
 		logger.log(Level.FINER, "Mod Plugin Load : Now checking for " + modName);
 	}
 
-	public static void loadedMod(String modid) {
+	public static void loadedMod(String modName) {
 		logger.setParent(FMLLog.getLogger());
-		logger.log(Level.FINER, "Mod Plugin Load : Succeeded loaded " + modid + " plugin");
+		logger.log(Level.FINER, "Mod Plugin Load : Succeeded loaded " + modName + " plugin");
 	}
 
-	public static void failedMod(String modid) {
+	public static void failedMod(String modName) {
 		logger.setParent(FMLLog.getLogger());
-		logger.log(Level.FINER, "Mod Plugin Load : Failed to check for " + modid);
+		logger.log(Level.FINER, "Mod Plugin Load : Failed to check for " + modName);
 	}
 
 	public static void otherLog(String aString) {
