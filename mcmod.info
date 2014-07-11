@@ -2,8 +2,8 @@
 {
   "modid": BankAndSafe
   "name": "BankAndSafe for MCEconomy",
-  "description": Addon for MCEconomy
-  "version": "0.0.1",
+  "description": An Addon for MCEconomy.Adds Bank and Safe and so on...
+  "version": "0.0.1_Alpha",
   "logoFile": "",
   "mcversion": "1.6.4",
   "url": "",

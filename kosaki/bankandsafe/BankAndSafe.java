@@ -35,14 +35,27 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 	modid="BankAndSafe",
 	name="BankAndSafe for MCEconomy",
 	version="0.0.1_Alpha",
-	//dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,;required-after:MCEconomy;);"
 	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,);required-after:MCEconomy"
-	//after:IC2;after:Forestry;after:SextiarySector;
+	//after:IC2;after:Forestry;after:SextiarySector;after:BuildCraft|Core;after:EnderIO
 )
 @NetworkMod
 (
 	clientSideRequired = true,
-	serverSideRequired = false
+	serverSideRequired = false	/*,
+	clientPacketHandlerSpec = 
+		@SidedPacketHandler
+		(
+			channels = {"mod"},
+		 	packetHandler = net.minecraft.src.SSPPacketHandler.class
+		),
+		
+	serverPacketHandlerSpec = 
+		@SidedPacketHandler
+		(
+			channels = {"mod" },
+			packetHandler = net.minecraft.src.SMPPacketHandler.class
+		)
+	*/
 )
 public class BankAndSafe
 {
@@ -50,7 +63,8 @@ public class BankAndSafe
 	 *自体のインスタンス・IDのフィールド等
 	 */
 	@Instance("BankAndSafe for MCEconomy")
-	public static BankAndSafe instance;
+	public static BankAndSafe instance = new BankAndSafe();
+	public static GuiHandler guiHandler = new GuiHandler();
 
 	public static final CreativeTabs tabBankAndSafe = new CreativeTabBankAndSafe("BankAndSafe");
 	public static Block blockBank;
@@ -252,7 +266,7 @@ public class BankAndSafe
 		/**
 		 *GUI追加
 		 */
-		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+		NetworkRegistry.instance().registerGuiHandler(this, guihandler);
 		/**
 		 * エンチャント登録
 		 */
