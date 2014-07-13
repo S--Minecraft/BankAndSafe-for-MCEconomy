@@ -21,7 +21,6 @@ import net.minecraftforge.common.Property;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -35,34 +34,21 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 	modid="BankAndSafe",
 	name="BankAndSafe for MCEconomy",
 	version="0.0.1_Alpha",
-	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,);required-after:MCEconomy"
+	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,)"
 	//after:IC2;after:Forestry;after:SextiarySector;after:BuildCraft|Core;after:EnderIO
+	//;required-after:MCEconomy
 )
 @NetworkMod
 (
 	clientSideRequired = true,
-	serverSideRequired = false	/*,
-	clientPacketHandlerSpec = 
-		@SidedPacketHandler
-		(
-			channels = {"mod"},
-		 	packetHandler = net.minecraft.src.SSPPacketHandler.class
-		),
-		
-	serverPacketHandlerSpec = 
-		@SidedPacketHandler
-		(
-			channels = {"mod" },
-			packetHandler = net.minecraft.src.SMPPacketHandler.class
-		)
-	*/
+	serverSideRequired = false
 )
 public class BankAndSafe
 {
 	/**
 	 *自体のインスタンス・IDのフィールド等
 	 */
-	@Instance("BankAndSafe for MCEconomy")
+	//@Instance("BankAndSafe for MCEconomy")
 	public static BankAndSafe instance = new BankAndSafe();
 	public static GuiHandler guiHandler = new GuiHandler();
 
@@ -82,8 +68,9 @@ public class BankAndSafe
 	public int item100MPID;
 	public int item1000MPID;
 	public int itemMPWandID;
-	public static final int bankGUIID = 1;
-	public static final int safeGUIID = 2;
+
+	public static final int bankGUIID = 0;
+	public static final int safeGUIID = 1;
 
 	//メッセージ
 	public static final String ITEM1000MP_TO_MP_MESSAGE = "Exchange to 1000MP is succeeded!";
@@ -122,7 +109,8 @@ public class BankAndSafe
 			Property blockProp[]=
 			{
 				cfg.getBlock("blockBankID", 2550),
-				cfg.getBlock("blockSafeID", 2551),
+				cfg.getBlock("blockSafeID", 2551)
+				//,cfg.getBlock("blockMPID", 2552)
 			};
 			Property itemProp[]={
 				cfg.getItem("item100MPID",12756),
@@ -135,7 +123,6 @@ public class BankAndSafe
 			textureSize = cfg.get(cfg.CATEGORY_GENERAL,
 						"Will you use x32 for the texture?",
 						false).getBoolean(false);
-				//cfg.getBlock("blockMPID", 2552)
 			if(textureSize)
 			{
 				textureSizeFile = 32;
@@ -151,7 +138,7 @@ public class BankAndSafe
 						true).getBoolean(true);
 			//MP増加エンチャントのID
 			moreMPdropID = cfg.get(cfg.CATEGORY_GENERAL,
-						"moreMPdropID", 255).getInt();
+						"Enchant[More MP Drop]ID", 255).getInt();
 
 			//リスポーン時に0MPにするかどうか
 			respawn0MP = cfg.get(cfg.CATEGORY_GENERAL,
@@ -161,12 +148,14 @@ public class BankAndSafe
 			respawnUseMP = cfg.get(cfg.CATEGORY_GENERAL,
 						"When you respawn,how much MP will be needed?",
 						10).getInt();
+
 			//IC2とGreg導入時、MPで商品を買えるのを許可するか
 			/*
 			useIC2GregMP = cfg.get(config.CATEGORY_GENERAL,
 						"When you are using Gregtech, can you buy the IC2 block with MP?",
 						false).getBoolean(false);
 			*/
+
 			blockBankID=blockProp[0].getInt();
 			blockSafeID=blockProp[1].getInt();
 			//blockMPID=blockProp[2].getInt();
@@ -190,31 +179,7 @@ public class BankAndSafe
 		 *Block・Item追加
 		 */
 		//別クラス化のときは「(new クラス名()).registerBlocks();」
-		//System.out.println("[BankAndSafe for MCEconomy] Adding blocks and items.");
 		BASLogger.BASLoading("Now registering Blocks and Items.");
-		/*blockBank = new BlockBank(blockBankID, Material.iron);
-		blockSafe = new BlockSafe(blockSafeID, Material.iron);
-		//blockMP = new BlockMP(blockMPID, Material.sponge)
-		item100MP = new Item100MP(item100MPID-256);
-		item1000MP = new Item1000MP(item1000MPID-256);
-		itemMPWand = new ItemMPWand(itemMPWandID-256);
-		GameRegistry.registerBlock(blockBank, "blockBank");
-		//GameRegistry.registerBlock(blockSafe, ItemBlockSafe.class, "blockSafe");
-		GameRegistry.registerBlock(blockSafe, "blockSafe");
-		//GameRegistry.registerBlock(blockMP, ItemBlockMP.class, "blockMP");
-		GameRegistry.registerItem(item100MP, "item100MP");
-		GameRegistry.registerItem(item1000MP, "item1000MP");
-		GameRegistry.registerItem(itemMPWand, "itemMPWand");*/
-	}
-
-	/**
-	 *Init
-	 */
-	@EventHandler
-	public void eventInit(FMLInitializationEvent e)
-	{
-		//System.out.println("[BankAndSafe for MCEconomy] Setting up contents.");
-		BASLogger.BASLoading("Now setting up contents.");
 		blockBank = new BlockBank(blockBankID, Material.iron);
 		blockSafe = new BlockSafe(blockSafeID, Material.iron);
 		//blockMP = new BlockMP(blockMPID, Material.sponge)
@@ -228,7 +193,15 @@ public class BankAndSafe
 		GameRegistry.registerItem(item100MP, "item100MP");
 		GameRegistry.registerItem(item1000MP, "item1000MP");
 		GameRegistry.registerItem(itemMPWand, "itemMPWand");
+	}
 
+	/**
+	 *Init
+	 */
+	@EventHandler
+	public void eventInit(FMLInitializationEvent e)
+	{
+		BASLogger.BASLoading("Now setting up contents.");
 		/**
 		 *MP増加エンチャント
 		 */
@@ -247,7 +220,7 @@ public class BankAndSafe
 		/**
 		 *言語登録
 		 */
-		System.out.println("[BankAndSafe for MCEconomy] Registering languages.");
+		BASLogger.BASLoading("[BankAndSafe for MCEconomy] Registering languages.");
 		//Localization.addLocalization("/bankandsafe/lang/", DefaultProps.DEFAULT_LANGUAGE);
 		//別クラス化のときは「(new LangRegister()).lang();」
 		LanguageRegistry.addName(blockBank, "MPBank");
@@ -266,11 +239,16 @@ public class BankAndSafe
 		/**
 		 *GUI追加
 		 */
-		NetworkRegistry.instance().registerGuiHandler(this, guihandler);
+		NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
 		/**
 		 * エンチャント登録
 		 */
 		MinecraftForge.EVENT_BUS.register(this);
+		/**
+		 * レシピ登録
+		 */
+		//
+		//
 	}
 
 	/**

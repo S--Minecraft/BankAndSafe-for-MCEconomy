@@ -1,7 +1,6 @@
 package kosaki.bankandsafe.blocks;
 
 import java.util.List;
-import java.util.Random;
 
 import kosaki.bankandsafe.BankAndSafe;
 import net.minecraft.block.Block;
@@ -34,7 +33,6 @@ public class BlockMP extends Block
 	/**
 	 *メタデータ
 	 */
-	@Override
 	public int damageDroppped(int metadata)
 	{
 		//ブロックを壊した時にドロップするもの
@@ -52,6 +50,7 @@ public class BlockMP extends Block
 		}
 	}
 	/*
+	@Override
 	public int idDropped(int metadata, Random rand, int fortune)
 	{
 		//ブロックを壊した時にドロップするもの

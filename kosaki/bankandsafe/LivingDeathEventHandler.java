@@ -1,6 +1,7 @@
 package kosaki.bankandsafe;
 
 import mceconomy.api.MCEconomyAPI;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.monster.EntityCaveSpider;
@@ -17,7 +18,9 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -58,14 +61,14 @@ public class LivingDeathEventHandler
 		 *MP増加エンチャントがあるとき
 		 */
 		byte moreMP=1;
-		//ItemStack equipItem = event.entityPlayer.getCurrentEquippedItem();
-		/*switch(EnchantmentHelper.getEnchantmentLevel(BankAndSafe.moreMPdropID, equipItem))
+		ItemStack equipItem = ((EntityPlayer) event.entityLiving).getCurrentEquippedItem();
+		switch(EnchantmentHelper.getEnchantmentLevel(BankAndSafe.moreMPdropID, equipItem))
 		{
 		case 0: moreMP = 1; break;
 		case 1: moreMP = 2; break;
 		case 2: moreMP = 3; break;
 		case 3: moreMP = 4; break;
-		}*/
+		}
 
 		/**
 		 *ダメージソースがプレイヤーの場合はMP加算する
