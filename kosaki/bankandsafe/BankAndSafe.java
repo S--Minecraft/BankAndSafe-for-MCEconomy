@@ -34,9 +34,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 	modid="BankAndSafe",
 	name="BankAndSafe for MCEconomy",
 	version="0.0.1_Alpha",
-	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,)"
+	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,);required-after:MCEconomy"
 	//after:IC2;after:Forestry;after:SextiarySector;after:BuildCraft|Core;after:EnderIO
-	//;required-after:MCEconomy
 )
 @NetworkMod
 (
@@ -48,7 +47,7 @@ public class BankAndSafe
 	/**
 	 *自体のインスタンス・IDのフィールド等
 	 */
-	//@Instance("BankAndSafe for MCEconomy")
+	@Instance("BankAndSafe for MCEconomy")
 	public static BankAndSafe instance = new BankAndSafe();
 	public static GuiHandler guiHandler = new GuiHandler();
 
