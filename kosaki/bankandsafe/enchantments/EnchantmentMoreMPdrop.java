@@ -8,6 +8,7 @@ public class EnchantmentMoreMPdrop extends Enchantment
 	public EnchantmentMoreMPdrop(int id, int weight)
 	{
 		super(id, weight, EnumEnchantmentType.weapon);
+		this.setName("moreMPdrop");
 	}
 
 	@Override

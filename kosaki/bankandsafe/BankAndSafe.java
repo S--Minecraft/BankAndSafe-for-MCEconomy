@@ -21,13 +21,13 @@ import net.minecraftforge.common.Property;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod
 (
@@ -186,8 +186,8 @@ public class BankAndSafe
 		item1000MP = new Item1000MP(item1000MPID-256);
 		itemMPWand = new ItemMPWand(itemMPWandID-256);
 		GameRegistry.registerBlock(blockBank, "blockBank");
-		//GameRegistry.registerBlock(blockSafe, ItemBlockSafe.class, "blockSafe");
 		GameRegistry.registerBlock(blockSafe, "blockSafe");
+		//GameRegistry.registerBlock(blockSafe, ItemBlockSafe.class, "blockSafe");
 		//GameRegistry.registerBlock(blockMP, ItemBlockMP.class, "blockMP");
 		GameRegistry.registerItem(item100MP, "item100MP");
 		GameRegistry.registerItem(item1000MP, "item1000MP");
@@ -206,7 +206,7 @@ public class BankAndSafe
 		 */
 		if (moreMPdropAdd)
 		{
-			moreMPdrop = (new EnchantmentMoreMPdrop(moreMPdropID, 2)).setName("moreMPdrop");
+			moreMPdrop = (new EnchantmentMoreMPdrop(moreMPdropID, 2));
 		}
 		/**
 		 *敵を倒したときのドロップMP
@@ -218,10 +218,13 @@ public class BankAndSafe
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 		/**
 		 *言語登録
+		 *
+		 *langファイルへ移動
 		 */
-		BASLogger.BASLoading("[BankAndSafe for MCEconomy] Registering languages.");
+		//BASLogger.BASLoading("[BankAndSafe for MCEconomy] Registering languages.");
 		//Localization.addLocalization("/bankandsafe/lang/", DefaultProps.DEFAULT_LANGUAGE);
 		//別クラス化のときは「(new LangRegister()).lang();」
+		/*
 		LanguageRegistry.addName(blockBank, "MPBank");
 		LanguageRegistry.addName(blockSafe, "MPSafe");
 		//LanguageRegistry.addName(new ItemStack(blockMP, 1, 0), "100MP Coin Block");
@@ -229,7 +232,7 @@ public class BankAndSafe
 		LanguageRegistry.addName(item100MP, "100MP Coin");
 		LanguageRegistry.addName(item1000MP, "1000MP Bill");
 		LanguageRegistry.addName(itemMPWand, "MPWand");
-
+		*/
 		/**
 		 *TileEntity登録
 		 */

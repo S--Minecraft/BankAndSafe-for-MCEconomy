@@ -31,12 +31,9 @@ public class Item1000MP extends Item
 		//内部に100MP追加
 		MCEconomyAPI.addPlayerMP(player, 1000);
 		//チャットで追加されたと表示
-		if (!world.isRemote)
+		if (!world.isRemote && player != null)
 		{
-			if (player != null)
-			{
-				player.addChatMessage(BankAndSafe.ITEM1000MP_TO_MP_MESSAGE);
-			}
+			player.addChatMessage(BankAndSafe.ITEM1000MP_TO_MP_MESSAGE);
 		}
 		return item;
 	}

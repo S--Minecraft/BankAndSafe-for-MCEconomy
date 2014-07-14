@@ -17,12 +17,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockMP extends Block
 {
-	@SideOnly(Side.CLIENT)
-	private Icon frontIcon0;
-	private Icon blockIcon0;
-	private Icon frontIcon1;
-	private Icon blockIcon1;
+	private Icon TopBottomIcon0;
+	private Icon SideIcon01;
+	private Icon SideIcon02;
+	private Icon TopBottomIcon1;
+	private Icon SideIcon11;
+	private Icon SideIcon12;
 
+	@SideOnly(Side.CLIENT)
 	public BlockMP(int par1, Material par2Material)
 	{
 		super(par1, par2Material);
@@ -49,25 +51,6 @@ public class BlockMP extends Block
 			return 0;
 		}
 	}
-	/*
-	@Override
-	public int idDropped(int metadata, Random rand, int fortune)
-	{
-		//ブロックを壊した時にドロップするもの
-		if(metadata<4)
-		{
-			return this.blockID;
-		}
-		else if(4<metadata)
-		{
-			return this.blockID;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-	*/
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -98,8 +81,6 @@ public class BlockMP extends Block
 		//par1:面　par2:メタデータ
 		//0&1:0～16=Other 2:2,5:3,3:0,4:1,
 		//表示面の方向を決定
-		//return par1 == 1 ? this.blockIcon : (par1 == 0 ? this.blockIcon : (par2 == 2 && par1 == 2 ? this.blockFront : (par2 == 3 && par1 == 5 ? this.blockFront : (par2 == 0 && par1 == 3 ? this.blockFront : (par2 == 1 && par1 == 4 ? this.blockFront : this.blockIcon)))));
-
 		if(par2<4)
 		{
 			//100MPCoinBlock
@@ -115,11 +96,11 @@ public class BlockMP extends Block
 	{
 		//表示面のテクスチャの設定
 		//TopBottomIcon0:上下0　SideIcon01:横0　SideIcon02　TopBottomIcon1:上下1　SideIcon11:横1　SideIcon12
-		/*this.TopBottomIcon0 = par1IconRegister.registerIcon("bankandsafe:100MP1 - " + BankAndSafe.textureSizeFile);
+		this.TopBottomIcon0 = par1IconRegister.registerIcon("bankandsafe:100MP1 - " + BankAndSafe.textureSizeFile);
 		this.SideIcon01 = par1IconRegister.registerIcon("bankandsafe:100MP2 - " + BankAndSafe.textureSizeFile);
 		this.SideIcon02 = par1IconRegister.registerIcon("bankandsafe:100MP3 - " + BankAndSafe.textureSizeFile);
 		this.TopBottomIcon1 = par1IconRegister.registerIcon("bankandsafe:1000MP1 - " + BankAndSafe.textureSizeFile);
 		this.SideIcon11 = par1IconRegister.registerIcon("bankandsafe:1000MP2 - " + BankAndSafe.textureSizeFile);
-		this.SideIcon12 = par1IconRegister.registerIcon("bankandsafe:1000MP3 - " + BankAndSafe.textureSizeFile);*/
+		this.SideIcon12 = par1IconRegister.registerIcon("bankandsafe:1000MP3 - " + BankAndSafe.textureSizeFile);
 	}
 }

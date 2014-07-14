@@ -2,8 +2,10 @@
 tile.blockBank.name=MPBank
 tile.blockSafe.name=MPSafe
 
-item.item100MP.name=100MP Coin
-item.item1000MP.name=1000MP Bill
-item.itemMPWand.name=MPWand
+item.Item100MP.name=100MP Coin
+item.Item1000MP.name=1000MP Bill
+item.ItemMPWand.name=MPWand
 
 creativetab.BankAndSafe=BankAndSafe
+
+enchantment.moreMPdrop=More MP Drop

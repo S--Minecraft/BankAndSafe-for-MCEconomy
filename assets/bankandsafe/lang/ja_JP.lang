@@ -2,8 +2,10 @@
 tile.blockBank.name=MP銀行
 tile.blockSafe.name=MP金庫
 
-item.item100MP.name=100MP玉
-item.item1000MP.name=1000MP札
-item.itemMPWand.name=MPの杖
+item.Item100MP.name=100MPコイン
+item.Item1000MP.name=1000MP札
+item.ItemMPWand.name=MPの杖
 
 creativetab.BankAndSafe=BankAndSafe
+
+enchantment.moreMPdrop=MPドロップ増加
