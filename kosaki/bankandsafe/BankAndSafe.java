@@ -47,7 +47,7 @@ public class BankAndSafe
 	/**
 	 *自体のインスタンス・IDのフィールド等
 	 */
-	@Instance("BankAndSafe for MCEconomy")
+	@Instance("BankAndSafe")
 	public static BankAndSafe instance = new BankAndSafe();
 	public static GuiHandler guiHandler = new GuiHandler();
 
