@@ -24,7 +24,6 @@ public class BlockBank extends Block
 		this.setCreativeTab(BankAndSafe.tabBankAndSafe);
 		this.setUnlocalizedName("blockBank");
 	}
-
 	/**
 	 *GUI
 	 */

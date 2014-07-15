@@ -15,6 +15,12 @@ public class GuiBlockBank extends GuiContainer
 {
 	private static final ResourceLocation guiTextures = new ResourceLocation("bankandsafe", "textures/guis/guiBank.png");
 
+    /** The X size of the inventory window in pixels. */
+    protected int xSize = 176;
+
+    /** The Y size of the inventory window in pixels. */
+    protected int ySize = 152;
+
 	public GuiBlockBank(EntityPlayer player, World world, int x, int y, int z)
 	{
 		super(new ContainerBlockBank(player, world, x, y, z));
@@ -23,12 +29,16 @@ public class GuiBlockBank extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRenderer.drawString("Bank", 58, 6, 0x404040);
+		//文字の部分
+		fontRenderer.drawString("Bank", 83, 15, 0x404040);
+		fontRenderer.drawString(inBankMPString, 85, 80, 0x999999);
+		fontRenderer.drawString(playerMPString, 20, 46, 0x999999);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
+		//GUI画像の位置
 		this.mc.getTextureManager().bindTexture(guiTextures);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int xStart = width - xSize >> 1;
@@ -65,4 +75,14 @@ public class GuiBlockBank extends GuiContainer
 		//PacketDispatcher.sendPacketToServer(packet); //send packet
 	}
 	*/
+
+	/**
+	 * 内部保存部分
+	 */
+	protected int inBankMP = 0;
+	protected int playerMP = 0/* = getPlayerMP(entityPlayer)*/;
+	protected String inBankMPString = String.valueOf(inBankMP);
+	protected String playerMPString = String.valueOf(playerMP);
+
+
 }

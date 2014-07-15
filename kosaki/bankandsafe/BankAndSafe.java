@@ -34,8 +34,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 	modid="BankAndSafe",
 	name="BankAndSafe for MCEconomy",
 	version="0.0.1_Alpha",
-	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,);required-after:MCEconomy"
+	dependencies="required-after:Forge@[9.10,);required-after:FML@[6.2,);after:MCEconomy"
 	//after:IC2;after:Forestry;after:SextiarySector;after:BuildCraft|Core;after:EnderIO
+	//required-
 )
 @NetworkMod
 (
@@ -59,6 +60,13 @@ public class BankAndSafe
 	public static Item item1000MP;
 	public static Item itemMPWand;
 	public static Enchantment moreMPdrop;
+
+	//public static Achivement getMPWand;
+	//public static Achivement ExchangeMPWand;
+	//public static Achivement getMPSafe;
+	//public static Achivement getMPBank;
+	//public static Achivement moreMPdrop;
+	//http://minecraftjp.info/modding/index.php/%E5%AE%9F%E7%B8%BE%E3%81%AE%E8%BF%BD%E5%8A%A0
 
 	//ID
 	public int blockBankID;

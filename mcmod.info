@@ -1,14 +1,15 @@
-﻿[
+[
 {
-  "modid": BankAndSafe
+  "modid": "BankAndSafe",
   "name": "BankAndSafe for MCEconomy",
-  "description": An Addon for MCEconomy.Adds Bank and Safe and so on...
+  "description": "An Addon for MCEconomy.Adds Bank and Safe and so on...",
   "version": "0.0.1_Alpha",
-  "logoFile": "",
   "mcversion": "1.6.4",
+  "logoFile": "",
   "url": "",
   "updateUrl": "",
-  "authors": [ "小咲みずあき(Kosaki Mizuaki)","S" ],
+  "authors": [ "小咲みずあき(Kosaki Mizuaki)","S","Others" ],
+  "credits": "",
   "parent":"",
   "screenshots": [],
   "dependencies": ["mod_MinecraftForge"]
