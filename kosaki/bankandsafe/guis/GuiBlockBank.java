@@ -13,8 +13,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiBlockBank extends GuiContainer
 {
-	private static final ResourceLocation guiTextures = new ResourceLocation("bankandsafe", "textures/gui/guiBank.png");
-	
+	private static final ResourceLocation guiTextures = new ResourceLocation("bankandsafe", "textures/guis/guiBank.png");
+
 	public GuiBlockBank(EntityPlayer player, World world, int x, int y, int z)
 	{
 		super(new ContainerBlockBank(player, world, x, y, z));
@@ -35,12 +35,12 @@ public class GuiBlockBank extends GuiContainer
 		int yStart = height - ySize >> 1;
 		drawTexturedModalRect(xStart, yStart, 0, 0, xSize, ySize);
 	}
-	
+
 	static ResourceLocation textureForButton()
     {
         return guiTextures;
     }
-    
+
 	//ボタン追加
 	/*
 	@Override

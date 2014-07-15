@@ -61,7 +61,7 @@ public class LivingDeathEventHandler
 		 *MP増加エンチャントがあるとき
 		 */
 		byte moreMP=1;
-		ItemStack equipItem = ((EntityPlayer) event.entityLiving).getCurrentEquippedItem();
+		ItemStack equipItem = ((EntityPlayer)event.entityLiving).getCurrentEquippedItem();
 		switch(EnchantmentHelper.getEnchantmentLevel(BankAndSafe.moreMPdropID, equipItem))
 		{
 		case 0: moreMP = 1; break;

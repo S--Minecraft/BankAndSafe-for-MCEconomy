@@ -44,7 +44,8 @@ public class BlockSafe extends BlockContainer
 	}*/
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are)	{
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are)
+	{
 		if (world.getBlockTileEntity(x, y, z) == null || player.isSneaking())
 		{
 			return false;
@@ -110,6 +111,7 @@ public class BlockSafe extends BlockContainer
 		}
 		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
+
 	/**
 	 *テクスチャ
 	 */

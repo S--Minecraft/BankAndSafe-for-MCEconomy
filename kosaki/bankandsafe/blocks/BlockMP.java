@@ -35,7 +35,8 @@ public class BlockMP extends Block
 	/**
 	 *メタデータ
 	 */
-	public int damageDroppped(int metadata)
+	@Override
+	public int damageDropped(int metadata)
 	{
 		//ブロックを壊した時にドロップするもの
 		if(metadata<4)

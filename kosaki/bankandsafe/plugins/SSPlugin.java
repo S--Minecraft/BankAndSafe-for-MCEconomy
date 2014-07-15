@@ -10,12 +10,11 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 public class SSPlugin
 {
-	World world = FMLClientHandler.instance().getClient().theWorld;
+	private static World world = FMLClientHandler.instance().getClient().theWorld;
+	private static MinecraftServer server=MinecraftServer.getServer();
+	private static EntityPlayer entityPlayer = server.getConfigurationManager().getPlayerForUsername("playerName");
 
-	private MinecraftServer server = MinecraftServer.getServer();
-	EntityPlayer entityPlayer = server.getConfigurationManager().getPlayerForUsername("playerName");
-
-	public void load()
+	public static void load()
 	{
 
 		//月給を追加

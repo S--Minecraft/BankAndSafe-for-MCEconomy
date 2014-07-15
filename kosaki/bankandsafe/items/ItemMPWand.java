@@ -49,6 +49,7 @@ public class ItemMPWand extends Item
 				player.addChatMessage(BankAndSafe.MP_TO_ITEM1000MP_CANCEL_MESSAGE);
 			}
 		}
+
 		return item;
 	}
 
@@ -60,15 +61,14 @@ public class ItemMPWand extends Item
 		//100MP以上ある場合処理
 		if(MCEconomyAPI.getPlayerMP(par2EntityPlayer)>=100)
 		{
-
 			if (!par2EntityPlayer.inventory.addItemStackToInventory(new ItemStack(BankAndSafe.item100MP)))
 			{
 				//100MP内部から引く
 				MCEconomyAPI.reducePlayerMP(par2EntityPlayer, 100);
 				//100MPアイテムを追加する
-
 				par2EntityPlayer.dropPlayerItem(new ItemStack(BankAndSafe.item100MP));
 			}
+
 			//チャットで追加されたと表示
 			if (!par3World.isRemote && par2EntityPlayer != null)
 			{

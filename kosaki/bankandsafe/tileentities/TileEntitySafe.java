@@ -17,7 +17,7 @@ public class TileEntitySafe extends TileEntity implements ISidedInventory
 	private static int slots_1000out;
 	public static int stackLimit;
 	private static ContainerBlockSafe container;
-	
+
 	@Override
 	public int getSizeInventory() {
 		// TODO 自動生成されたメソッド・スタブ

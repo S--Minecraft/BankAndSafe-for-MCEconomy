@@ -29,7 +29,7 @@ public class GuiBlockSafe extends GuiContainer
 	protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
 	{
 		//GUI画像の位置
-		this.mc.getTextureManager().bindTexture(new ResourceLocation ("bankandsafe", "textures/gui/guiSafe.png"));
+		this.mc.getTextureManager().bindTexture(new ResourceLocation ("bankandsafe", "textures/guis/guiSafe.png"));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int xStart = width - xSize >> 1;
 		int yStart = height - ySize >> 1;

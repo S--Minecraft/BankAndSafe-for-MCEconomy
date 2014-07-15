@@ -201,12 +201,13 @@ public class BankAndSafe
 	public void eventInit(FMLInitializationEvent e)
 	{
 		BASLogger.BASLoading("Now setting up contents.");
+
 		/**
 		 *MP増加エンチャント
 		 */
 		if (moreMPdropAdd)
 		{
-			moreMPdrop = (new EnchantmentMoreMPdrop(moreMPdropID, 2));
+			moreMPdrop = new EnchantmentMoreMPdrop(moreMPdropID, 2);
 		}
 		/**
 		 *敵を倒したときのドロップMP
@@ -233,6 +234,7 @@ public class BankAndSafe
 		LanguageRegistry.addName(item1000MP, "1000MP Bill");
 		LanguageRegistry.addName(itemMPWand, "MPWand");
 		*/
+
 		/**
 		 *TileEntity登録
 		 */
