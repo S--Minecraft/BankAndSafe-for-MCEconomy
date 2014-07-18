@@ -66,6 +66,9 @@ public class BankAndSafe
 	//public static Achivement getMPSafe;
 	//public static Achivement getMPBank;
 	//public static Achivement moreMPdrop;
+	//public static Achivement To100,000MP;
+	//public static Achivement To1,000,000MP;
+	//public static Achivement To100,000,000MP;
 	//http://minecraftjp.info/modding/index.php/%E5%AE%9F%E7%B8%BE%E3%81%AE%E8%BF%BD%E5%8A%A0
 
 	//ID
