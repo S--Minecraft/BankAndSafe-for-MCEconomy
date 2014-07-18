@@ -212,7 +212,6 @@ public class BankAndSafe
 	public void eventInit(FMLInitializationEvent e)
 	{
 		BASLogger.BASLoading("Now setting up contents.");
-
 		/**
 		 *MP増加エンチャント
 		 */
@@ -245,11 +244,9 @@ public class BankAndSafe
 		LanguageRegistry.addName(item1000MP, "1000MP Bill");
 		LanguageRegistry.addName(itemMPWand, "MPWand");
 		*/
-
 		/**
 		 *TileEntity登録
 		 */
-		//GameRegistry.registerTileEntity(BlockBank.class, "blockBank");
 		GameRegistry.registerTileEntity(TileEntitySafe.class, "containerSafe");
 		/**
 		 *GUI追加

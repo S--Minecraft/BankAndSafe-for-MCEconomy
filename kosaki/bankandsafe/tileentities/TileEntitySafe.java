@@ -2,95 +2,93 @@ package kosaki.bankandsafe.tileentities;
 
 import kosaki.bankandsafe.guis.ContainerBlockSafe;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 
-public class TileEntitySafe extends TileEntity implements ISidedInventory
+public class TileEntitySafe extends TileEntity implements IInventory
 {
 	private static ItemStack Item100MPStack;
 	private static ItemStack Item1000MPStack;
-	private static int slots_100in;
-	private static int slots_100out;
-	private static int slots_1000in;
-	private static int slots_1000out;
+	private static ItemStack tileSlot[];
+	private static int slots[];//[0]=100,[1]=1000
 	public static int stackLimit;
 	private static ContainerBlockSafe container;
-
-	@Override
+    private String customName;
+    
+    /**
+     * IInventory
+     */
+    @Override
 	public int getSizeInventory() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 0;
+		return 2;
 	}
 	@Override
 	public ItemStack getStackInSlot(int i) {
-		// TODO 自動生成されたメソッド・スタブ
+        switch(i)
+        {
+        case 0: return Item100MPStack;
+        case 1: return Item1000MPStack;
+        }
 		return null;
 	}
 	@Override
-	public ItemStack decrStackSize(int i, int j) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+	public ItemStack decrStackSize(int slot, int amt)
+	{
+		 ItemStack stack = getStackInSlot(slot);
+		 if (stack != null)
+		 {
+			 if (stack.stackSize <= amt)
+			 {
+				 setInventorySlotContents(slot, null);
+			 }
+			 else
+			{
+				stack = stack.splitStack(amt);
+				if (stack.stackSize == 0)
+				{
+					setInventorySlotContents(slot, null);
+				}
+			}
+		}
+		return stack;
 	}
 	@Override
 	public ItemStack getStackInSlotOnClosing(int i) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return getStackInSlot(i);
 	}
 	@Override
-	public void setInventorySlotContents(int i, ItemStack itemstack) {
-		// TODO 自動生成されたメソッド・スタブ
-
+	public void setInventorySlotContents(int slot, ItemStack stack) {
+		tileSlot[0] = Item100MPStack;
+		tileSlot[1] = Item1000MPStack;
 	}
 	@Override
 	public String getInvName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return this.isInvNameLocalized() ? this.customName : "container.safe";
 	}
 	@Override
 	public boolean isInvNameLocalized() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+        return this.customName != null && this.customName.length() > 0;
 	}
 	@Override
 	public int getInventoryStackLimit() {
-		// TODO 自動生成されたメソッド・スタブ
-		return 64;
+		return stackLimit;
 	}
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : entityplayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
 	}
 	@Override
 	public void openChest() {
-		// TODO 自動生成されたメソッド・スタブ
-
+		//分からん
 	}
 	@Override
 	public void closeChest() {
-		// TODO 自動生成されたメソッド・スタブ
-
+		//分からん
 	}
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
-	}
-	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
-	}
-	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		// TODO 自動生成されたメソッド・スタブ
 		return false;
 	}
 

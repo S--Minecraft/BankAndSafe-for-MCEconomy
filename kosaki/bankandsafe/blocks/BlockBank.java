@@ -17,6 +17,7 @@ public class BlockBank extends Block
 {
 	@SideOnly(Side.CLIENT)
 	private Icon frontIcon;
+	public static EntityPlayer openedPlayer;
 
 	public BlockBank(int par1, Material par2Material)
 	{
@@ -34,6 +35,7 @@ public class BlockBank extends Block
 		if (!world.isRemote)
 		{
 			player.openGui(BankAndSafe.instance, BankAndSafe.bankGUIID, world, x, y, z);
+			openedPlayer = player;
 		}
 		return true;
 	}

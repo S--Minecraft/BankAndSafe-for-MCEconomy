@@ -5,17 +5,14 @@ import kosaki.bankandsafe.tileentities.TileEntitySafe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ContainerBlockSafe extends Container
 {
-	private InventoryPlayer playerInventory;
-	private IInventory guiInventory = new InventoryBasic("slots", false, 4);
-	private TileEntitySafe tileentitysafe;
+	//private IInventory safeInventory = new InventoryBasic("slots", false, 4);
+	//private TileEntitySafe tileentity;
+
 	private World world;
 	private int xCoord;
 	private int yCoord;
@@ -30,13 +27,13 @@ public class ContainerBlockSafe extends Container
 	}
 
 	//スロット追加
-	public ContainerBlockSafe(EntityPlayer player, TileEntitySafe par2TileEntity) {
-		this.tileentitysafe = par2TileEntity;
-		// Inventoryで追加するインベントリ
-		this.addSlotToContainer(new Slot(this.tileentitysafe, 0, 45, 51));
-		this.addSlotToContainer(new Slot(this.tileentitysafe, 1, 45, 87));
-		this.addSlotToContainer(new Slot(this.tileentitysafe, 2, 79, 51));
-		this.addSlotToContainer(new Slot(this.tileentitysafe, 3, 79, 87));
+	public ContainerBlockSafe(InventoryPlayer playerInv, TileEntitySafe par2TileEntity) {
+		//this.tileentity = par2TileEntity;
+		//Inventoryで追加するインベントリ
+		//this.addSlotToContainer(new Slot(this.tileentity, 0, 45, 51));
+		//this.addSlotToContainer(new Slot(this.tileentity, 1, 45, 87));
+		//this.addSlotToContainer(new Slot(this.tileentity, 2, 79, 51));
+		//this.addSlotToContainer(new Slot(this.tileentity, 3, 79, 87));
 
 		int i;
 		// 1 ～ 3段目のインベントリ
@@ -44,17 +41,18 @@ public class ContainerBlockSafe extends Container
 		{
 			for (int j = 0; j < 9; ++j)
 			{
-				this.addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				this.addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			}
 		}
 		// 4段目のインベントリ
 		for (i = 0; i < 9; ++i)
 		{
-			this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
+			this.addSlotToContainer(new Slot(playerInv, i, 8 + i * 18, 142));
 		}
 	}
 
 	// Shiftクリック
+	/*
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = null;
@@ -107,6 +105,7 @@ public class ContainerBlockSafe extends Container
 		}
 		return itemstack;
 	}
+	*/
 
 	//開ける距離
 	@Override

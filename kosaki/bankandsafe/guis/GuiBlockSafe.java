@@ -15,22 +15,18 @@ public class GuiBlockSafe extends GuiContainer
 {
 	private static final ResourceLocation guiTextures = new ResourceLocation("bankandsafe", "textures/guis/guiSafe.png");
 
-	/** The X size of the inventory window in pixels. */
-    protected int xSize = 176;
-
-    /** The Y size of the inventory window in pixels. */
-    protected int ySize = 196;
-
 	public GuiBlockSafe(EntityPlayer player, World world, int x, int y, int z)
 	{
 		super(new ContainerBlockSafe(player, world, x, y, z));
+		this.xSize = 175;
+		this.ySize = 173;
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		//文字の部分
-		fontRenderer.drawString("Safe", 83, 15, 0x404040);
+		fontRenderer.drawString("Safe", 83, 10, 0x404040);
 	}
 
 	@Override
