@@ -6,6 +6,9 @@ item.Item100MP.name=100MP Coin
 item.Item1000MP.name=1000MP Bill
 item.ItemMPWand.name=MPWand
 
+container.bank.name=MPBank
+container.safe.name=MPSafe
+
 creativetab.BankAndSafe=BankAndSafe
 
 enchantment.moreMPdrop=More MP Drop

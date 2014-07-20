@@ -26,7 +26,7 @@ public class GuiBlockSafe extends GuiContainer
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		//文字の部分
-		fontRenderer.drawString("Safe", 83, 10, 0x404040);
+		fontRenderer.drawString("container.safe", 83, 10, 0x404040);
 	}
 
 	@Override

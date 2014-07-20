@@ -17,7 +17,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiBlockBank extends GuiContainer
 {
 	private static final ResourceLocation guiTextures = new ResourceLocation("bankandsafe", "textures/guis/guiBank.png");
-	EntityPlayer entityPlayer = BlockBank.openedPlayer;
 
 	public GuiBlockBank(EntityPlayer player, World world, int x, int y, int z)
 	{
@@ -30,7 +29,7 @@ public class GuiBlockBank extends GuiContainer
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		//文字の部分
-		fontRenderer.drawString("Bank", 83, 15, 0x404040);
+		fontRenderer.drawString("container.bank", 83, 15, 0x404040);
 		fontRenderer.drawString(playerMPString, 20, 41, 0x999999);
 		fontRenderer.drawString(inBankMPString, 105, 80, 0x999999);
 	}
@@ -52,7 +51,8 @@ public class GuiBlockBank extends GuiContainer
     }
 
 	//ボタン追加
-	public void initGui() {
+	public void initGui()
+	{
 		super.initGui();
 		this.buttonList.clear();
 		//make buttons
@@ -63,48 +63,16 @@ public class GuiBlockBank extends GuiContainer
 		buttonList.add(new GuiButton(3, 232, 160, 18, 18,"-1000"));
 		buttonList.add(new GuiButton(4, 252, 160, 18, 18,"-10000"));
 	}
-	protected void actionPerformed(GuiButton guibutton) {
-		switch(guibutton.id) {
-		case 1:
-			//ボタン1が押されたら銀行に1000MP送金
-			if(MCEconomyAPI.getPlayerMP(entityPlayer)>=1000)
-				{
-					MCEconomyAPI.reducePlayerMP(entityPlayer,1000);
-					inBankMP =+ 1000;
-				};
-			break;
-		case 2:
-			//ボタン2が押されたら銀行に10000MP送金
-			if(MCEconomyAPI.getPlayerMP(entityPlayer)>=10000)
-			{
-				MCEconomyAPI.reducePlayerMP(entityPlayer,10000);
-				inBankMP =+ 10000;
-			};
-			break;
-		case 3:
-			//ボタン3が押されたら銀行から1000MP出金
-			if(inBankMP>=1000)
-			{
-				MCEconomyAPI.addPlayerMP(entityPlayer,1000);
-				inBankMP =- 1000;
-			};
-			break;
-		case 4:
-			//ボタン4が押されたら銀行から10000MP出金
-			if(inBankMP>=10000)
-			{
-				MCEconomyAPI.addPlayerMP(entityPlayer,10000);
-				inBankMP =- 10000;
-			};
-			break;
-		}
+	protected void actionPerformed(GuiButton guibutton)
+	{
+		BankAndSafe.packetDispatcher.sendToServer(new GuiButtonPacket(guiButton.id));
 	}
 
 	/**
 	 * 内部保存部分
 	 */
 	protected int inBankMP = 0;
-	protected int playerMP = MCEconomyAPI.getPlayerMP(entityPlayer);
+	protected int playerMP = 0/*MCEconomyAPI.getPlayerMP(entityPlayer)*/;
 	protected String inBankMPString = String.valueOf(inBankMP);
 	protected String playerMPString = String.valueOf(playerMP);
 }

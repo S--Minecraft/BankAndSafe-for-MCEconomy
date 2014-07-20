@@ -34,6 +34,11 @@ public class BASLogger {
 		logger.log(Level.FINEST, "Loading : " + aString);
 	}
 
+	public static void warning(String aString) {
+		logger.setParent(FMLLog.getLogger());
+		logger.log(Level.FINEST, "WARNING : " + aString);
+	}
+
 	public static void log(String aString) {
 		logger.setParent(FMLLog.getLogger());
 		logger.log(Level.FINEST, aString);

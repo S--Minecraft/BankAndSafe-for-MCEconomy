@@ -90,6 +90,13 @@ public class BankAndSafe
 	public static final String MP_TO_ITEM100MP_MESSAGE = "Exchange to 100MPItem is succeeded!";
 	public static final String MP_TO_ITEM100MP_CANCEL_MESSAGE = "Exchange to 100MPItem is failed.";
 
+
+	/*
+	 * ModIDを渡して新しいチャネルを取得する.
+	 * このインスタンスは引数で与えたModIDのMod専用のチャネルになる.
+	 */
+	public static final SimpleNetworkWrapper packetDispatcher = NetworkRegistry.INSTANCE.newSimpleChannel("BankAndSafe");
+
 	//config関連
 	public static boolean textureSize;
 	public static int textureSizeFile;
@@ -252,6 +259,11 @@ public class BankAndSafe
 		 *GUI追加
 		 */
 		NetworkRegistry.instance().registerGuiHandler(this, guiHandler);
+		/**
+		 *パケット追加
+		 */
+		
+		packetDispatcher.registerMessage(GuiButtonPacketHandler.class, GuiButtonPacket.class, 0, Side.SERVER);
 		/**
 		 * エンチャント登録
 		 */
