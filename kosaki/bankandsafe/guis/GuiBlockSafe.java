@@ -3,6 +3,7 @@ package kosaki.bankandsafe.guis;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -26,7 +27,8 @@ public class GuiBlockSafe extends GuiContainer
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		//文字の部分
-		fontRenderer.drawString("container.safe", 83, 10, 0x404040);
+		int x = (xSize - fontRenderer.getStringWidth(StatCollector.translateToLocal("tile.blockSafe.name"))) / 2;
+		fontRenderer.drawString(StatCollector.translateToLocal("tile.blockSafe.name"), x, 10, 0x404040);
 	}
 
 	@Override

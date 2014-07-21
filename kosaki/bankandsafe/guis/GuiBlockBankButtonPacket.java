@@ -1,40 +1,40 @@
+/*
 package kosaki.bankandsafe.guis;
 
-import io.netty.buffer.ByteBuf;
 
-public class GuiButtonPacket
+public class GuiBlockBankButtonPacket
 {
 	/*
 	 *今回パケットで扱うデータ
-	 */
+	 *//*
 	private byte buttonId;
 
-	public GuiButtonPacket()
+	public GuiBlockBankButtonPacket()
 	{
 	}
 
 	/*
 	 * パケットの生成には通常こちらを用いる.
-	 */
-	public GuiButtonPacket(int _buttonId)
+	 *//*
+	public GuiBlockBankButtonPacket(int _buttonId)
 	{
 		this.buttonId = (byte)_buttonId;
 	}
 
 	/*
 	 * パケットのバイト列からデータを読みとる.
-	 */
+	 *//*
 	@Override
-	public void fromBytes(ByteBuf buffer)
+	public void fromBytes(ByteBuff buffer)
 	{
 		buttonId = buffer.readByte();
 	}
 
 	/*
 	 * パケットのバイト列へデータを書き込む.
-	 */
+	 *//*
 	@Override
-	public void toBytes(ByteBuf buffer)
+	public void toBytes(ByteBuff buffer)
 	{
 		buffer.writeByte(buttonId);
 	}
@@ -42,10 +42,10 @@ public class GuiButtonPacket
 	/*
 	 * PacketHandlerでパケットのデータを参照するためのメソッド.
 	 * 必要に応じてgetter, setter, 他を用意する.
-	 */
+	 *//*
 	public byte getButtonId()
 	{
 		return buttonId;
 	}
-
 }
+*/

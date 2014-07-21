@@ -20,11 +20,12 @@ public class CreativeTabBankAndSafe extends CreativeTabs
 		return BankAndSafe.item100MP;
 	}
 
+	/*
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getTranslatedTabLabel()
 	{
 		return "BankAndSafe";
 	}
-
+	*/
 }

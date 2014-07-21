@@ -11,7 +11,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 public class SSPlugin
 {
 	private static World world = FMLClientHandler.instance().getClient().theWorld;
-	private static MinecraftServer server=MinecraftServer.getServer();
+	private static MinecraftServer server = MinecraftServer.getServer();
 	private static EntityPlayer entityPlayer = server.getConfigurationManager().getPlayerForUsername("playerName");
 
 	public static void load()

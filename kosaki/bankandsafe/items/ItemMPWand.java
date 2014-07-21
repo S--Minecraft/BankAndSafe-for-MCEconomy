@@ -17,6 +17,7 @@ public class ItemMPWand extends Item
 		this.setUnlocalizedName("ItemMPWand");
 		this.setTextureName("bankandsafe:MPWand - " + BankAndSafe.textureSizeFile);
 		this.setMaxStackSize(1);
+		this.setFull3D();
 	}
 
 	@Override

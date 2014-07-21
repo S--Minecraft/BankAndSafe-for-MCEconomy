@@ -1,19 +1,24 @@
+/*
 package kosaki.bankandsafe.guis;
 
 import cpw.mods.fml.common.network.IPacketHandler;
-import net.minecraft.util.ChatComponentTranslation;
+import cpw.mods.fml.common.network.Player;
+import mceconomy.api.MCEconomyAPI;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet250CustomPayload;
 
 /*
  * パケットの処理を行うメソッド
  */
+/*
 public class GuiBlockBankButtonPacketHandler implements IPacketHandler
 {
-	@Override
-	public void onPacketData(INetworkManager manager, GuiButtonPacket packet, Player player) {
+	public void onPacketData(INetworkManager manager, GuiBlockBankButtonPacket packet, Player player) {
 	try
 	{
 		EntityPlayer entityPlayer = (EntityPlayer)player;
-		switch(guibutton.id)
+		switch(GuiBlockBank.guibutton.id)
 		{
 			case 1:
 				//ボタン1が押されたら銀行に1000MP送金
@@ -48,6 +53,13 @@ public class GuiBlockBankButtonPacketHandler implements IPacketHandler
 				};
 				break;
 		}
-		return null;
 	}
-}
+
+	@Override
+	public void onPacketData(INetworkManager manager,
+			Packet250CustomPayload packet, Player player) {
+
+	}
+
+	}
+*/
